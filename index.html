@@ -369,7 +369,10 @@
     var n = "";
     try { n = new URLSearchParams(location.search).get("name") || ""; } catch (e) {}
     n = (n || "friend").trim();
-    return n.charAt(0).toUpperCase() + n.slice(1);
+    // Title-case each word so multi-word names ("alex lu") read right.
+    return n.replace(/\S+/g, function (w) {
+      return w.charAt(0).toUpperCase() + w.slice(1);
+    });
   }
   var NAME = resolveName();
 
