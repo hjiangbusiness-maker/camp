@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Camp August '26 · Your Pass</title>
+<meta name="theme-color" content="#ffffff">
+
+<!-- Open Graph so the link previews nicely when shared -->
+<meta property="og:title" content="Camp August '26 · Your seat is held">
+<meta property="og:description" content="A personal invitation. Los Angeles, Aug 3 to 12, 2026.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hjiangbusiness-maker.github.io/camp/">
+<!-- Hosted on GitHub Pages (repo: hjiangbusiness-maker/camp). If hosting ever
+     moves (e.g. camp.rndv.world), update these two absolute urls. -->
+<meta property="og:image" content="https://hjiangbusiness-maker.github.io/camp/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Pinyon+Script&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     RSVP DELIVERY  ->  Formspree
+     ------------------------------------------------------------
+     1. Go to formspree.io, create a form (send-to: henry@rndv.world).
+     2. Copy the form's endpoint, e.g. https://formspree.io/f/abcdwxyz
+     3. Paste it into RSVP_ENDPOINT in the script at the bottom.
+     Until it is set, the form falls back to a pre-filled email.
+     ============================================================ */
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #ffffff; }
+  /* Desktop: frame the phone-width column on warm paper */
+  @media (min-width: 431px) {
+    body { background: #f3f0ea; }
+  }
+  ::selection { background: #ff5232; color: #ffffff; }
+
+  /* Center the phone-width column on larger screens */
+  .rndv-stage {
+    position: relative;
+    height: 100vh;
+    height: 100dvh;
+    max-width: 430px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #ffffff;
+    color: #1b1714;
+    font-family: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    box-shadow: 0 0 0 1px rgba(27,23,20,0.06);
+    container-type: inline-size;
+  }
+
+  /* Type scales with the COLUMN (cqw), not the window (vw), so nothing
+     overflows when the column is narrower than the screen (desktop).
+     The vw declaration stays as a fallback for older browsers. */
+  .hero-h1     { font-size: clamp(46px,15vw,84px);  font-size: clamp(46px,15cqw,84px); }
+  .stitch-hero { font-size: clamp(40px,13vw,68px);  font-size: clamp(40px,13cqw,68px); }
+  .stitch-gate { font-size: clamp(58px,18vw,150px); font-size: clamp(58px,18cqw,150px); }
+
+  /* Desktop: full-bleed, edge to edge, and relayout so it uses the room */
+  @media (min-width: 760px) {
+    .rndv-stage { max-width: none; box-shadow: none; }
+  }
+  @container (min-width: 700px) {
+    .pad-section { padding-left: 48px !important; padding-right: 48px !important; }
+    .hero-h1     { font-size: clamp(84px, 12cqw, 112px); }
+    .stitch-hero { font-size: clamp(56px, 8.5cqw, 80px); }
+    .pass-grid   { grid-template-columns: repeat(4, 1fr) !important; }
+    .fields-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; align-items: end; }
+    .field-wide  { grid-column: 1 / -1; }
+  }
+  /* Wide desktop: bigger gutters and type, two-up intro and manifest */
+  @container (min-width: 1000px) {
+    .pad-section { padding-left: 72px !important; padding-right: 72px !important; }
+    .hero-h1     { font-size: clamp(96px, 9cqw, 150px); }
+    .stitch-hero { font-size: clamp(64px, 6.5cqw, 100px); }
+    .intro-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .intro-grid p { margin: 0 !important; }
+    .manifest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; }
+  }
+
+  /* Short windows: tighten the gate so nothing clips */
+  @media (max-height: 700px) {
+    .stitch-gate { font-size: clamp(44px,13vw,96px); font-size: clamp(44px,13cqw,96px); }
+    .gate-board  { margin-top: 16px !important; }
+    .gate-cta    { margin-top: 16px !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0s !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  .rndv-scroll::-webkit-scrollbar { width: 0; height: 0; }
+  .rndv-scroll { scrollbar-width: none; }
+
+  .stitch {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M2 2L8 8M8 2L2 8' stroke='%231b1714' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"),
+      linear-gradient(rgba(27,23,20,0.36), rgba(27,23,20,0.36));
+    background-size: 10px 10px, 100% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  input, textarea, button { font-family: inherit; }
+
+  @keyframes stitchIn { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes rndvUp   { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: translateY(0); } }
+  @keyframes rndvFade { from { opacity:0; } to { opacity:1; } }
+  @keyframes rndvBlink{ 0%,49% { opacity:1; } 50%,100% { opacity:0.15; } }
+  @keyframes rndvBob  { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+</style>
+</head>
+<body>
+
+<div class="rndv-stage">
+
+  <!-- ============ INVITE (scrolls underneath) ============ -->
+  <div class="rndv-scroll" style="position:absolute; inset:0; z-index:1; overflow-y:auto; -webkit-overflow-scrolling:touch; background:#ffffff;">
+
+    <!-- sticky head -->
+    <div class="pad-section" style="position:sticky; top:0; z-index:6; background:#ffffff; border-bottom:1px solid #1b1714; padding:13px 22px; display:flex; align-items:center; justify-content:space-between; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase;">
+      <span style="font-weight:700;">RNDV&reg;</span>
+      <span style="color:#6b6258;">Platform 001 &middot; Arrivals</span>
+      <span style="color:#ff5232; font-weight:700;">Boarding</span>
+    </div>
+
+    <!-- hero stripe -->
+    <section class="pad-section" style="padding:34px 22px 26px; border-bottom:1px solid #1b1714;">
+      <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#ff5232; margin-bottom:14px;">Your seat is held</div>
+      <h1 class="hero-h1" style="margin:0; font-family:'Archivo',sans-serif; font-weight:900; line-height:0.84; letter-spacing:-0.05em;">Welcome&nbsp;<span style="display:block;">to Camp.</span></h1>
+      <div class="stitch stitch-hero" style="margin-top:18px; display:inline-block; font-family:'Pinyon Script',cursive; line-height:1;">Rendezvous</div>
+    </section>
+
+    <!-- intro -->
+    <section class="pad-section" style="padding:28px 22px 20px;">
+      <div class="intro-grid">
+      <p style="margin:0; font-family:'Archivo',sans-serif; font-weight:500; font-size:17px; line-height:1.5; max-width:30em;"><span data-name>friend</span>, you are personally invited to Camp August '26 - a small, hand picked group of creators, living and building together for ten days in Los Angeles.</p>
+      <p style="margin:16px 0 0; font-family:'Archivo',sans-serif; font-weight:400; font-size:15px; line-height:1.6; color:#3a322c; max-width:30em;">RNDV is a creator production company building entertainment IP. This is where it starts, and you were chosen for this room.</p>
+      </div>
+    </section>
+
+    <!-- BOARDING PASS card -->
+    <section class="pad-section" style="padding:8px 22px 26px;">
+      <div style="background:#1b1714; color:#f3f0ea; position:relative;">
+        <div style="padding:20px 22px 16px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px dashed #4a423b;">
+          <span style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;">Boarding Pass</span>
+          <span style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8a7f73;">No. <span data-passno>001</span> / 010</span>
+        </div>
+        <!-- notches -->
+        <div style="position:absolute; left:-9px; top:52px; width:18px; height:18px; border-radius:50%; background:#ffffff;"></div>
+        <div style="position:absolute; right:-9px; top:52px; width:18px; height:18px; border-radius:50%; background:#ffffff;"></div>
+
+        <div class="pass-grid" style="padding:18px 22px 6px; display:grid; grid-template-columns:1fr 1fr; gap:18px 16px; font-family:'Space Mono',monospace;">
+          <div style="grid-column:1 / -1;">
+            <div style="font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:#8a7f73; margin-bottom:6px;">Passenger</div>
+            <div data-name style="font-size:18px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase;">FRIEND</div>
+          </div>
+          <div>
+            <div style="font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:#8a7f73; margin-bottom:6px;">Destination</div>
+            <div style="font-size:15px; font-weight:700; letter-spacing:0.04em;">LOS ANGELES</div>
+          </div>
+          <div>
+            <div style="font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:#8a7f73; margin-bottom:6px;">Dates</div>
+            <div style="font-size:15px; font-weight:700; letter-spacing:0.04em;">AUG 3 &ndash; 12</div>
+          </div>
+          <div>
+            <div style="font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:#8a7f73; margin-bottom:6px;">Duration</div>
+            <div style="font-size:15px; font-weight:700; letter-spacing:0.04em;">10 DAYS</div>
+          </div>
+          <div>
+            <div style="font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:#8a7f73; margin-bottom:6px;">Stay</div>
+            <div style="font-size:15px; font-weight:700; letter-spacing:0.04em; color:#ff5232;">COVERED</div>
+          </div>
+        </div>
+
+        <!-- barcode -->
+        <div style="padding:14px 22px 20px;">
+          <div style="height:34px; background-image:repeating-linear-gradient(90deg, #f3f0ea 0 2px, transparent 2px 4px, #f3f0ea 4px 5px, transparent 5px 9px, #f3f0ea 9px 12px, transparent 12px 14px);"></div>
+          <div style="display:flex; justify-content:space-between; margin-top:8px; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:#8a7f73;">
+            <span>RNDV&middot;CAMP001&middot;PH1</span>
+            <span>Location private until RSVP</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- what to expect / manifest -->
+    <section class="pad-section" style="padding:24px 22px 14px;">
+      <div style="display:flex; align-items:baseline; gap:14px; border-top:1px solid #1b1714; padding-top:12px; margin-bottom:14px;">
+        <span style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700;">02</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-weight:800; font-size:18px; letter-spacing:-0.01em; text-transform:uppercase;">On the manifest</h2>
+      </div>
+      <div class="manifest-grid">
+        <div style="display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid rgba(27,23,20,0.14);">
+          <span style="width:14px; height:14px; flex:none; background:#ff5232; margin-top:2px;"></span>
+          <div>
+            <div style="font-family:'Space Mono',monospace; font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">The work</div>
+            <div style="font-family:'Archivo',sans-serif; font-size:14px; line-height:1.55; color:#3a322c; margin-top:4px;">Ten days of making: shoots, edits, new formats, and swings at ideas too big to try alone.</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid rgba(27,23,20,0.14);">
+          <span style="width:14px; height:14px; flex:none; background:#1b1714; margin-top:2px;"></span>
+          <div>
+            <div style="font-family:'Space Mono',monospace; font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">The dinner</div>
+            <div style="font-family:'Archivo',sans-serif; font-size:14px; line-height:1.55; color:#3a322c; margin-top:4px;">One table with working producers, talent, and operators. The rooms that usually take years to reach.</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid rgba(27,23,20,0.14);">
+          <span style="width:14px; height:14px; flex:none; background:#ff5232; margin-top:2px;"></span>
+          <div>
+            <div style="font-family:'Space Mono',monospace; font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">The content</div>
+            <div style="font-family:'Archivo',sans-serif; font-size:14px; line-height:1.55; color:#3a322c; margin-top:4px;">Cameras stay up around the house. Everyone leaves with a bank of footage they could not have made solo.</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid rgba(27,23,20,0.14);">
+          <span style="width:14px; height:14px; flex:none; background:#1b1714; margin-top:2px;"></span>
+          <div>
+            <div style="font-family:'Space Mono',monospace; font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">The people</div>
+            <div style="font-family:'Archivo',sans-serif; font-size:14px; line-height:1.55; color:#3a322c; margin-top:4px;">Nine other creators, hand picked for this room. What starts here is meant to outlast the trip.</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin:16px 0 0; font-family:'Archivo',sans-serif; font-style:italic; font-size:15px; line-height:1.5; color:#3a322c;">That is the manifest. The rest, we tell you in person.</p>
+    </section>
+
+    <!-- RSVP -->
+    <section class="pad-section" style="padding:30px 22px 22px; margin-top:14px; border-top:2px solid #1b1714;">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:6px;">
+        <span style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700;">03</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-weight:800; font-size:18px; letter-spacing:-0.01em; text-transform:uppercase;">Confirm your seat</h2>
+      </div>
+      <p style="margin:0 0 24px; font-family:'Space Mono',monospace; font-size:11px; line-height:1.7; letter-spacing:0.02em; color:#6b6258;">We are finalizing the roster this week. Tell us where you stand.</p>
+
+      <!-- form state -->
+      <form id="rsvp-form">
+        <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:10px;">You already said yes, so...</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:24px;">
+          <button type="button" class="attend-btn" data-attend="yes" style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; padding:14px 6px; border:1px solid #1b1714; background:#ffffff; color:#1b1714; cursor:pointer;">Yes</button>
+          <button type="button" class="attend-btn" data-attend="maybe" style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; padding:14px 6px; border:1px solid #1b1714; background:#ffffff; color:#1b1714; cursor:pointer;">Yes</button>
+          <button type="button" class="attend-btn" data-attend="cant" style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; padding:14px 6px; border:1px solid #1b1714; background:#ffffff; color:#1b1714; cursor:pointer;">I lied</button>
+        </div>
+
+        <div class="fields-grid">
+        <div class="field field-wide">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:6px;">Any conflicts with Aug 3 to 12?</label>
+        <div style="font-family:'Archivo',sans-serif; font-size:13px; line-height:1.45; color:#6b6258; margin-bottom:10px;">If something overlaps, tell us. We will try to make it work.</div>
+        <input class="rndv-input" name="conflicts" type="text" placeholder="All clear, or tell us" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        </div>
+
+        <div class="field">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Flying in? From where?</label>
+        <input class="rndv-input" name="origin" type="text" placeholder="City, or driving" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        </div>
+
+        <div class="field">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Dietary restrictions</label>
+        <input class="rndv-input" name="dietary" type="text" placeholder="For group meals &amp; the dinner" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        </div>
+
+        <div class="field">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Best contact (phone or handle)</label>
+        <input class="rndv-input" name="bestContact" type="text" placeholder="So we can reach you fast" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        </div>
+
+        <div class="field">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Emergency contact</label>
+        <input class="rndv-input" name="emergencyContact" type="text" placeholder="Name &amp; number, just in case" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        </div>
+
+        <div class="field field-wide">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Something you'd like to do in LA, or just think is fun</label>
+        <input class="rndv-input" name="funThingLA" type="text" placeholder="Spots, food, anything" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        </div>
+
+        <div class="field field-wide">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Anything you need from us?</label>
+        <textarea class="rndv-input" name="needs" rows="2" placeholder="Optional" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:26px; outline:none; resize:none;"></textarea>
+        </div>
+        </div>
+
+        <!-- 04 / goals prescreen: shapes the camp curriculum around the room -->
+        <div style="display:flex; align-items:baseline; gap:14px; border-top:1px solid #1b1714; padding-top:14px; margin-bottom:6px;">
+          <span style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700;">04</span>
+          <h2 style="margin:0; font-family:'Archivo',sans-serif; font-weight:800; font-size:18px; letter-spacing:-0.01em; text-transform:uppercase;">Where you're headed</h2>
+        </div>
+        <p style="margin:0 0 24px; font-family:'Space Mono',monospace; font-size:11px; line-height:1.7; letter-spacing:0.02em; color:#6b6258;">We build the ten days around the room. Tell us what you are chasing so the sessions serve you, not a generic curriculum.</p>
+
+        <div class="fields-grid">
+        <div class="field">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">What are you focused on right now?</label>
+        <input class="rndv-input" name="focusNow" type="text" placeholder="Growth, a format, consistency, a pivot" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        </div>
+        <div class="field">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Where do you want to be in six months?</label>
+        <input class="rndv-input" name="sixMonths" type="text" placeholder="Numbers, formats, money, whatever counts" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        </div>
+        <div class="field field-wide">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">One thing you want to leave camp having made or figured out</label>
+        <input class="rndv-input" name="campGoal" type="text" placeholder="Be specific, we will build around it" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:26px; outline:none;">
+        </div>
+        </div>
+
+        <button type="submit" style="width:100%; display:flex; align-items:center; justify-content:center; gap:12px; background:#1b1714; color:#f3f0ea; border:none; cursor:pointer; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:18px;" class="submit-btn">
+          Confirm my seat
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+      </form>
+
+      <!-- confirmed state (hidden until submit) -->
+      <div id="rsvp-confirmed" style="display:none; border:1px solid #1b1714; padding:26px 22px; animation:rndvUp 0.5s ease both;">
+        <div style="display:flex; align-items:center; gap:10px; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#ff5232;"><span style="width:9px; height:9px; border-radius:50%; background:#ff5232;"></span>Seat confirmed</div>
+        <div style="margin-top:14px; font-family:'Archivo',sans-serif; font-weight:900; font-size:30px; letter-spacing:-0.03em; line-height:1;">You're on the manifest, <span data-name>friend</span>.</div>
+        <p style="margin:14px 0 0; font-family:'Archivo',sans-serif; font-size:15px; line-height:1.5; color:#3a322c;">We will send the address and the rest privately as the date gets close.</p>
+        <p style="margin:12px 0 0; font-family:'Space Mono',monospace; font-size:11px; line-height:1.7; letter-spacing:0.02em; color:#6b6258;">Questions, email <span style="color:#1b1714; font-weight:700;">henry@rndv.world</span>.</p>
+        <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <a id="cal-link" download="camp-august-26.ics" href="#" style="display:inline-flex; align-items:center; gap:8px; background:#1b1714; color:#f3f0ea; text-decoration:none; font-family:'Space Mono',monospace; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:12px 16px; cursor:pointer;">Add to calendar</a>
+          <button type="button" id="edit-again" style="background:transparent; border:1px solid rgba(27,23,20,0.3); color:#6b6258; cursor:pointer; font-family:'Space Mono',monospace; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:11px 16px;">&larr; Edit response</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="pad-section" style="padding:34px 22px 46px; border-top:1px solid #1b1714; text-align:center;">
+      <div class="stitch" style="display:inline-block; font-family:'Pinyon Script',cursive; font-size:42px; line-height:1;">Rendezvous</div>
+      <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#6b6258; margin-top:16px; line-height:1.9;">Camp August '26 &middot; Los Angeles &middot; MMXXVI<br>By invitation only &middot; henry@rndv.world</div>
+    </footer>
+
+  </div>
+
+  <!-- ============ CINEMATIC REVEAL OVERLAY ============ -->
+  <div id="overlay" style="position:absolute; inset:0; z-index:10; transform:translateY(0); opacity:1; pointer-events:auto; transition:transform 1.1s cubic-bezier(0.7,0,0.2,1), opacity 1.1s ease;">
+    <div id="overlay-inner" class="rndv-scroll" style="position:absolute; inset:0; background:#ffffff; overflow-x:hidden; overflow-y:auto; display:flex; flex-direction:column;">
+      <!-- populated by renderOverlay() -->
+    </div>
+  </div>
+
+  <!-- replay -->
+  <button type="button" id="replay-btn" style="position:absolute; bottom:calc(14px + env(safe-area-inset-bottom, 0px)); right:14px; z-index:20; display:none; align-items:center; gap:7px; background:rgba(255,255,255,0.88); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); border:1px solid rgba(27,23,20,0.2); cursor:pointer; font-family:'Space Mono',monospace; font-size:9px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#6b6258; padding:8px 11px;">&#8635; Replay</button>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ============================================================
+     RSVP_ENDPOINT — paste your Formspree URL between the quotes,
+     e.g. "https://formspree.io/f/abcdwxyz".
+     Leave "" to fall back to a pre-filled email to Henry.
+     ============================================================ */
+  var RSVP_ENDPOINT = "https://formspree.io/f/xwvdzlgv";
+  var RSVP_EMAIL = "henry@rndv.world";
+
+  /* ---------- name personalization ---------- */
+  function resolveName() {
+    var n = "";
+    try { n = new URLSearchParams(location.search).get("name") || ""; } catch (e) {}
+    n = (n || "friend").trim();
+    return n.charAt(0).toUpperCase() + n.slice(1);
+  }
+  var NAME = resolveName();
+
+  // Fill every element tagged data-name; boarding pass wants uppercase.
+  Array.prototype.forEach.call(document.querySelectorAll("[data-name]"), function (el) {
+    var upper = el.style.textTransform === "uppercase";
+    el.textContent = upper ? NAME.toUpperCase() : NAME;
+  });
+
+  /* ---------- pass number (?no=3 -> "No. 003 / 010") ---------- */
+  var PASSNO = "001";
+  try {
+    var rawNo = parseInt(new URLSearchParams(location.search).get("no"), 10);
+    if (rawNo >= 1 && rawNo <= 999) PASSNO = ("00" + rawNo).slice(-3);
+  } catch (e) {}
+  Array.prototype.forEach.call(document.querySelectorAll("[data-passno]"), function (el) {
+    el.textContent = PASSNO;
+  });
+
+  /* ---------- remember boarding across visits ---------- */
+  var BOARDED_KEY = "rndv-boarded-" + NAME.toLowerCase();
+  function hasBoarded() {
+    try { return localStorage.getItem(BOARDED_KEY) === "1"; } catch (e) { return false; }
+  }
+  function rememberBoarded() {
+    try { localStorage.setItem(BOARDED_KEY, "1"); } catch (e) {}
+  }
+
+  /* ---------- overlay + countdown ---------- */
+  var overlay = document.getElementById("overlay");
+  var overlayInner = document.getElementById("overlay-inner");
+  var countdownTimer = null;
+  var count = 5;
+
+  function overlayTemplate() {
+    return ''
+    + '<div style="position:relative; z-index:2; padding:24px; display:flex; justify-content:space-between; align-items:center; font-family:\'Space Mono\',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; border-bottom:1px solid #1b1714; animation:rndvFade 0.9s ease 0.15s both;">'
+    +   '<span style="font-weight:700;">RNDV&reg;</span>'
+    +   '<span style="color:#6b6258;">Platform 001 &middot; Arrivals</span>'
+    +   '<span style="font-weight:700;">LAX</span>'
+    + '</div>'
+
+    + '<div style="position:relative; z-index:2; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; text-align:center;">'
+    +   '<div style="font-family:\'Space Mono\',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:#ff5232; margin-bottom:8px; animation:rndvUp 0.7s ease 0.6s both;">Passenger: ' + escapeHtml(NAME) + '</div>'
+    +   '<div style="overflow:hidden; padding:0 4px;">'
+    +     '<div class="stitch stitch-gate" style="display:inline-block; font-family:\'Pinyon Script\',cursive; line-height:1.05; animation:stitchIn 1.8s steps(30) 0.35s both;">Rendezvous</div>'
+    +   '</div>'
+    +   '<div style="font-family:\'Space Mono\',monospace; font-size:10px; letter-spacing:0.24em; text-transform:uppercase; color:#6b6258; margin-top:8px; animation:rndvFade 1s ease 1.9s both;">CAMP AUGUST &#39;26</div>'
+    +   '<div class="gate-board" style="margin-top:30px; width:100%; max-width:340px; background:#1b1714; color:#f3f0ea; display:grid; grid-template-columns:1fr 1fr 1fr; font-family:\'Space Mono\',monospace; animation:rndvUp 0.8s ease 2.05s both;">'
+    +     '<div style="padding:14px 12px; border-right:1px solid #4a423b;"><div style="font-size:8px; letter-spacing:0.14em; color:#8a7f73; text-transform:uppercase; margin-bottom:6px;">Dest</div><div style="font-size:13px; font-weight:700; letter-spacing:0.06em;">LA</div></div>'
+    +     '<div style="padding:14px 12px; border-right:1px solid #4a423b;"><div style="font-size:8px; letter-spacing:0.14em; color:#8a7f73; text-transform:uppercase; margin-bottom:6px;">Dates</div><div style="font-size:13px; font-weight:700; letter-spacing:0.06em;">AUG 03-12</div></div>'
+    +     '<div style="padding:14px 12px;"><div style="font-size:8px; letter-spacing:0.14em; color:#8a7f73; text-transform:uppercase; margin-bottom:6px;">Status</div>'
+    +       '<div style="font-size:13px; font-weight:700; letter-spacing:0.04em; display:flex; align-items:center; justify-content:center; gap:6px;">'
+    +         '<span id="status-dot" style="width:6px; height:6px; border-radius:50%;"></span>'
+    +         '<span id="status-text"></span>'
+    +         '<span style="width:6px; height:6px; flex:none;"></span>'
+    +       '</div>'
+    +     '</div>'
+    +   '</div>'
+    +   '<button type="button" id="board-btn" class="gate-cta" style="margin-top:28px; display:inline-flex; align-items:center; justify-content:center; gap:12px; min-width:236px; background:#1b1714; color:#f3f0ea; border:none; cursor:pointer; font-family:\'Space Mono\',monospace; font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:17px 30px; animation:rndvUp 0.8s ease 2.35s both;">'
+    +     '<span id="board-label"></span>'
+    +     '<svg id="board-arrow" width="15" height="15" viewBox="0 0 16 16" fill="none" style="display:none; animation:rndvBob 1.6s ease-in-out 3s infinite;"><path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+    +   '</button>'
+    + '</div>'
+
+    + '<div style="position:relative; z-index:2; padding:0 24px 24px; display:flex; justify-content:space-between; align-items:center; font-family:\'Space Mono\',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#6b6258; animation:rndvFade 1s ease 2.5s both;">'
+    +   '<span style="color:#ff5232; font-weight:700; letter-spacing:0.16em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>'
+    +   '<span>This pass is yours alone</span>'
+    + '</div>';
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  var INK = "#1b1714", SIGNAL = "#ff5232", MUTED2 = "#8a7f73", PAPER = "#f3f0ea";
+
+  function paintCountdown() {
+    var label = document.getElementById("board-label");
+    var arrow = document.getElementById("board-arrow");
+    var btn = document.getElementById("board-btn");
+    var dot = document.getElementById("status-dot");
+    var stat = document.getElementById("status-text");
+    if (!label) return;
+
+    if (count > 0) {
+      // boarding pending
+      label.textContent = "Boarding in  0:0" + count;
+      btn.disabled = true;
+      btn.style.opacity = "0.5";
+      btn.style.cursor = "default";
+      arrow.style.display = "none";
+      stat.textContent = "CLOSED";
+      stat.style.color = MUTED2;
+      dot.style.background = MUTED2;
+      dot.style.animation = "none";
+    } else {
+      // ready
+      label.textContent = "Board now";
+      btn.disabled = false;
+      btn.style.opacity = "1";
+      btn.style.cursor = "pointer";
+      arrow.style.display = "";
+      stat.textContent = "OPEN";
+      stat.style.color = SIGNAL;
+      dot.style.background = SIGNAL;
+      dot.style.animation = "rndvBlink 0.8s steps(1,end) infinite";
+    }
+  }
+
+  function bindBoardHover(btn) {
+    btn.addEventListener("mouseenter", function () {
+      if (btn.disabled) return;
+      btn.style.background = SIGNAL; btn.style.color = "#ffffff";
+    });
+    btn.addEventListener("mouseleave", function () {
+      btn.style.background = INK; btn.style.color = PAPER;
+    });
+  }
+
+  function startCountdown() {
+    clearInterval(countdownTimer);
+    count = 5;
+    paintCountdown();
+    countdownTimer = setInterval(function () {
+      count = count <= 1 ? 0 : count - 1;
+      paintCountdown();
+      if (count === 0) clearInterval(countdownTimer);
+    }, 1000);
+  }
+
+  function mountOverlay() {
+    overlayInner.innerHTML = overlayTemplate();
+    var btn = document.getElementById("board-btn");
+    bindBoardHover(btn);
+    btn.addEventListener("click", function () {
+      if (btn.disabled) return;
+      overlay.style.transform = "translateY(-101%)";
+      overlay.style.opacity = "0";
+      overlay.style.pointerEvents = "none";
+      rb.style.display = "flex"; // replay only appears once you're inside
+      rememberBoarded();         // return visits skip the gate
+    });
+    startCountdown();
+  }
+
+  // Replay: reset overlay position, remount subtree (restarts CSS animations), restart countdown.
+  var rb = document.getElementById("replay-btn");
+  rb.addEventListener("click", function () {
+    overlay.style.transform = "translateY(0)";
+    overlay.style.opacity = "1";
+    overlay.style.pointerEvents = "auto";
+    rb.style.display = "none"; // hidden while the gate is showing
+    mountOverlay();
+  });
+  rb.addEventListener("mouseenter", function () { rb.style.color = SIGNAL; rb.style.borderColor = SIGNAL; });
+  rb.addEventListener("mouseleave", function () { rb.style.color = "#6b6258"; rb.style.borderColor = "rgba(27,23,20,0.2)"; });
+
+  if (hasBoarded()) {
+    // Return visit: skip the gate, land straight on the invitation.
+    overlay.style.transition = "none";
+    overlay.style.transform = "translateY(-101%)";
+    overlay.style.opacity = "0";
+    overlay.style.pointerEvents = "none";
+    rb.style.display = "flex"; // Replay still lets them run it again
+    setTimeout(function () {
+      overlay.style.transition = "transform 1.1s cubic-bezier(0.7,0,0.2,1), opacity 1.1s ease";
+    }, 60);
+  } else {
+    mountOverlay();
+  }
+
+  /* ---------- input focus accents ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll(".rndv-input"), function (el) {
+    el.addEventListener("focus", function () { el.style.borderColor = SIGNAL; });
+    el.addEventListener("blur", function () { el.style.borderColor = INK; });
+  });
+
+  /* ---------- submit button hover ---------- */
+  var submitBtn = document.querySelector(".submit-btn");
+  submitBtn.addEventListener("mouseenter", function () { submitBtn.style.background = SIGNAL; submitBtn.style.color = "#ffffff"; });
+  submitBtn.addEventListener("mouseleave", function () { submitBtn.style.background = INK; submitBtn.style.color = PAPER; });
+
+  /* ---------- attend selector ---------- */
+  var attending = null;
+  var ATTEND_STYLE = {
+    yes:   { bg: "#ff5232", color: "#ffffff", border: "#ff5232" },
+    maybe: { bg: "#1b1714", color: "#f3f0ea", border: "#1b1714" },
+    cant:  { bg: "#6b6258", color: "#ffffff", border: "#6b6258" }
+  };
+  var attendBtns = document.querySelectorAll(".attend-btn");
+  function paintAttend() {
+    Array.prototype.forEach.call(attendBtns, function (b) {
+      var key = b.getAttribute("data-attend");
+      if (attending === key) {
+        var s = ATTEND_STYLE[key];
+        b.style.background = s.bg; b.style.color = s.color; b.style.borderColor = s.border;
+      } else {
+        b.style.background = "#ffffff"; b.style.color = INK; b.style.borderColor = INK;
+      }
+    });
+  }
+  Array.prototype.forEach.call(attendBtns, function (b) {
+    b.addEventListener("click", function () { attending = b.getAttribute("data-attend"); paintAttend(); });
+  });
+
+  /* ---------- form submit ---------- */
+  var form = document.getElementById("rsvp-form");
+  var confirmed = document.getElementById("rsvp-confirmed");
+
+  function collect() {
+    var data = { name: NAME, attending: attending || "" };
+    Array.prototype.forEach.call(form.querySelectorAll("[name]"), function (el) {
+      data[el.name] = el.value;
+    });
+    data.passNo = PASSNO;
+    // Formspree: makes the notification email subject readable.
+    data._subject = "Camp August '26 RSVP - " + NAME;
+    return data;
+  }
+
+  function showConfirmed() {
+    form.style.display = "none";
+    confirmed.style.display = "";
+    confirmed.style.animation = "none";
+    void confirmed.offsetWidth; // reflow so the entrance animation replays
+    confirmed.style.animation = "rndvUp 0.5s ease both";
+  }
+
+  function mailtoFallback(data) {
+    var lines = [
+      "Name: " + data.name,
+      "Attending: " + (data.attending || "(not marked)"),
+      "Conflicts Aug 3-12: " + (data.conflicts || ""),
+      "Flying in from: " + (data.origin || ""),
+      "Dietary: " + (data.dietary || ""),
+      "Best contact: " + (data.bestContact || ""),
+      "Emergency contact: " + (data.emergencyContact || ""),
+      "Fun thing in LA: " + (data.funThingLA || ""),
+      "Needs from us: " + (data.needs || ""),
+      "Focused on now: " + (data.focusNow || ""),
+      "Six months out: " + (data.sixMonths || ""),
+      "Camp goal: " + (data.campGoal || "")
+    ];
+    var href = "mailto:" + RSVP_EMAIL
+      + "?subject=" + encodeURIComponent("Camp August '26 RSVP - " + data.name)
+      + "&body=" + encodeURIComponent(lines.join("\n"));
+    window.location.href = href;
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var data = collect();
+
+    if (!RSVP_ENDPOINT) {
+      // No endpoint configured: hand off via a pre-filled email instead.
+      mailtoFallback(data);
+      showConfirmed();
+      confirmed.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = "0.6";
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, 10000);
+    fetch(RSVP_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(data),
+      signal: ctrl.signal
+    }).then(function (r) {
+      if (!r.ok) throw new Error("submit failed: " + r.status);
+    }).catch(function () {
+      // Endpoint unreachable or rejected: fall back to email so no RSVP is lost.
+      mailtoFallback(data);
+    }).then(function () {
+      clearTimeout(timer);
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = "1";
+      showConfirmed();
+      confirmed.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  });
+
+  document.getElementById("edit-again").addEventListener("click", function () {
+    confirmed.style.display = "none";
+    form.style.display = "";
+  });
+
+  /* ---------- add to calendar (ICS, all-day Aug 3-12 2026) ---------- */
+  var ICS = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//RNDV//Camp August 26//EN",
+    "BEGIN:VEVENT",
+    "UID:camp-aug26-" + PASSNO + "@rndv.world",
+    "DTSTAMP:20260702T000000Z",
+    "DTSTART;VALUE=DATE:20260803",
+    "DTEND;VALUE=DATE:20260813",
+    "SUMMARY:Camp August '26 (RNDV)",
+    "LOCATION:Los Angeles",
+    "DESCRIPTION:Ten days. Address arrives privately closer to the date. Questions: henry@rndv.world",
+    "END:VEVENT",
+    "END:VCALENDAR"
+  ].join("\r\n");
+  var calLink = document.getElementById("cal-link");
+  calLink.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ICS);
+  calLink.addEventListener("mouseenter", function () { calLink.style.background = SIGNAL; calLink.style.color = "#ffffff"; });
+  calLink.addEventListener("mouseleave", function () { calLink.style.background = INK; calLink.style.color = PAPER; });
+
+})();
+</script>
+</body>
+</html>
