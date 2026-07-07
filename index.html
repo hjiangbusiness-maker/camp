@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Camp August '26 · Your Pass</title>
 <meta name="theme-color" content="#ffffff">
 
@@ -62,6 +62,10 @@
   .hero-h1     { font-size: clamp(46px,15vw,84px);  font-size: clamp(46px,15cqw,84px); }
   .stitch-hero { font-size: clamp(40px,13vw,68px);  font-size: clamp(40px,13cqw,68px); }
   .stitch-gate { font-size: clamp(58px,18vw,150px); font-size: clamp(58px,18cqw,150px); }
+
+  /* Mobile/base gutters: 22px inline paddings read cramped, widen to 28px.
+     The container rules below re-override at >=700 (48px) and >=1000 (72px). */
+  .pad-section { padding-left: 28px !important; padding-right: 28px !important; }
 
   /* Desktop: full-bleed, edge to edge, and relayout so it uses the room */
   @media (min-width: 760px) {
@@ -201,7 +205,7 @@
     <section class="pad-section" style="padding:24px 22px 14px;">
       <div style="display:flex; align-items:baseline; gap:14px; border-top:1px solid #1b1714; padding-top:12px; margin-bottom:14px;">
         <span style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700;">02</span>
-        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-weight:800; font-size:18px; letter-spacing:-0.01em; text-transform:uppercase;">At a glance</h2>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-weight:800; font-size:18px; letter-spacing:-0.01em; text-transform:uppercase;">Promise me this.</h2>
       </div>
       <div class="manifest-grid">
         <div style="display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid rgba(27,23,20,0.14);">
@@ -229,7 +233,7 @@
           </div>
         </div>
       </div>
-      <p style="margin:16px 0 0; font-family:'Archivo',sans-serif; font-style:italic; font-size:15px; line-height:1.5; color:#3a322c;">Housing &amp; transportation are covered. Some meals &amp; food will be covered too, but plan on getting your own food for 1-2 meals a day.</p>
+      <p style="margin:16px 0 0; font-family:'Archivo',sans-serif; font-style:italic; font-size:15px; line-height:1.5; color:#3a322c;">Housing, transportation, and some meals are covered. Plan on your own food 1-2 meals a day.</p>
     </section>
 
     <!-- RSVP -->
@@ -253,38 +257,38 @@
         <div class="field field-wide">
         <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:6px;">Any conflicts with Aug 3 to 12?</label>
         <div style="font-family:'Archivo',sans-serif; font-size:13px; line-height:1.45; color:#6b6258; margin-bottom:10px;">If something overlaps, tell us. We will try to make it work.</div>
-        <input class="rndv-input" name="conflicts" type="text" placeholder="All clear, or tell us" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        <input class="rndv-input" name="conflicts" type="text" placeholder="All clear, or tell us" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:14px; padding:13px 14px; margin-bottom:24px; outline:none;">
         </div>
 
         <div class="field">
         <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:6px;">Flying in? From where?</label>
         <div style="font-family:'Archivo',sans-serif; font-size:13px; line-height:1.45; color:#6b6258; margin-bottom:10px;">Flight booked? Add the info here. If not, text me as soon as you have it.</div>
-        <input class="rndv-input" name="origin" type="text" placeholder="City, or driving. Flight # if booked" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        <input class="rndv-input" name="origin" type="text" placeholder="City, or driving. Flight # if booked" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:14px; padding:13px 14px; margin-bottom:24px; outline:none;">
         </div>
 
         <div class="field">
         <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Dietary restrictions</label>
-        <input class="rndv-input" name="dietary" type="text" placeholder="For group meals" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        <input class="rndv-input" name="dietary" type="text" placeholder="For group meals" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:14px; padding:13px 14px; margin-bottom:24px; outline:none;">
         </div>
 
         <div class="field">
         <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Best contact (phone or handle)</label>
-        <input class="rndv-input" name="bestContact" type="text" placeholder="So we can reach you fast" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        <input class="rndv-input" name="bestContact" type="text" placeholder="So we can reach you fast" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:14px; padding:13px 14px; margin-bottom:24px; outline:none;">
         </div>
 
         <div class="field">
         <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Emergency contact</label>
-        <input class="rndv-input" name="emergencyContact" type="text" placeholder="Name &amp; number, just in case" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        <input class="rndv-input" name="emergencyContact" type="text" placeholder="Name &amp; number, just in case" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:14px; padding:13px 14px; margin-bottom:24px; outline:none;">
         </div>
 
         <div class="field field-wide">
-        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Something you'd like to do in LA, or just think is fun</label>
-        <input class="rndv-input" name="funThingLA" type="text" placeholder="Spots, food, anything" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Something fun you want to do in LA</label>
+        <input class="rndv-input" name="funThingLA" type="text" placeholder="Spots, food, anything" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:14px; padding:13px 14px; margin-bottom:24px; outline:none;">
         </div>
 
         <div class="field field-wide">
         <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Anything you need from us?</label>
-        <textarea class="rndv-input" name="needs" rows="2" placeholder="Optional" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:26px; outline:none; resize:none;"></textarea>
+        <textarea class="rndv-input" name="needs" rows="2" placeholder="Optional" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:14px; padding:13px 14px; margin-bottom:26px; outline:none; resize:none;"></textarea>
         </div>
         </div>
 
@@ -298,19 +302,19 @@
         <div class="fields-grid">
         <div class="field">
         <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">What are you MOST focused on right now?</label>
-        <input class="rndv-input" name="focusNow" type="text" placeholder="Growth, a format, consistency, a pivot" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        <input class="rndv-input" name="focusNow" type="text" placeholder="Growth, a format, consistency, a pivot" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:14px; padding:13px 14px; margin-bottom:24px; outline:none;">
         </div>
         <div class="field">
-        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Where do you want to be by the end of this year? Be as specific as you can</label>
-        <input class="rndv-input" name="sixMonths" type="text" placeholder="Numbers, formats, money, whatever counts" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:18px; outline:none;">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">Where do you want to be by December?</label>
+        <input class="rndv-input" name="sixMonths" type="text" placeholder="Be specific: numbers, formats, money" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:14px; padding:13px 14px; margin-bottom:24px; outline:none;">
         </div>
         <div class="field field-wide">
-        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">One thing you want to leave camp having made or figured out</label>
-        <input class="rndv-input" name="campGoal" type="text" placeholder="Be specific, we will try to build &amp; include what we can" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:16px; padding:13px 14px; margin-bottom:26px; outline:none;">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">One thing to make or figure out at camp</label>
+        <input class="rndv-input" name="campGoal" type="text" placeholder="Be specific, we will try to build &amp; include what we can" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:14px; padding:13px 14px; margin-bottom:26px; outline:none;">
         </div>
 
         <div class="field field-wide">
-        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:10px;">What sounds the most fun to make? Pick one or more.</label>
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:10px;">Most fun to make? Pick one or more.</label>
         <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:24px;">
           <button type="button" class="fmt-btn" data-fmt="Long form" style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; padding:14px 6px; border:1px solid #1b1714; background:#ffffff; color:#1b1714; cursor:pointer;">Long form</button>
           <button type="button" class="fmt-btn" data-fmt="Short form" style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; padding:14px 6px; border:1px solid #1b1714; background:#ffffff; color:#1b1714; cursor:pointer;">Short form</button>
@@ -323,7 +327,7 @@
         <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:26px;">
           <button type="button" class="push-btn" data-push="I'm scared" style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; padding:14px 6px; border:1px solid #1b1714; background:#ffffff; color:#1b1714; cursor:pointer;">I'm scared</button>
           <button type="button" class="push-btn" data-push="Yes" style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; padding:14px 6px; border:1px solid #1b1714; background:#ffffff; color:#1b1714; cursor:pointer;">Yes</button>
-          <input id="push-custom" type="text" placeholder="Your own words" style="font-family:'Space Mono',monospace; font-size:16px; text-align:center; padding:10px 6px; border:1px solid #1b1714; background:#ffffff; color:#1b1714; outline:none; width:100%; min-width:0;">
+          <input id="push-custom" type="text" placeholder="Your own words" style="font-family:'Space Mono',monospace; font-size:14px; text-align:center; padding:10px 6px; border:1px solid #1b1714; background:#ffffff; color:#1b1714; outline:none; width:100%; min-width:0;">
         </div>
         </div>
         </div>
