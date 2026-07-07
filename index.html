@@ -145,7 +145,7 @@
     <section class="pad-section" style="padding:34px 22px 26px; border-bottom:1px solid #1b1714;">
       <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#ff5232; margin-bottom:14px;">Your seat is held</div>
       <h1 class="hero-h1" style="margin:0; font-family:'Archivo',sans-serif; font-weight:900; line-height:0.84; letter-spacing:-0.05em;">Welcome&nbsp;<span style="display:block;">to Camp.</span></h1>
-      <div class="stitch stitch-hero" style="margin-top:18px; display:inline-block; font-family:'Pinyon Script',cursive; line-height:1;">Rendezvous</div>
+      <div class="stitch stitch-hero" style="margin-top:18px; display:inline-block; font-family:'Pinyon Script',cursive; line-height:1; padding-bottom:0.24em; margin-bottom:-0.24em;">Rendezvous</div>
     </section>
 
     <!-- intro -->
@@ -232,7 +232,7 @@
           <span style="width:14px; height:14px; flex:none; background:#1b1714; margin-top:2px;"></span>
           <div>
             <div style="font-family:'Archivo',sans-serif; font-weight:700; font-size:15px; line-height:1.45; color:#1b1714;">Make more friends.</div>
-            <div style="font-family:'Archivo',sans-serif; font-size:13px; line-height:1.55; color:#3a322c; margin-top:5px;">Toward the end of camp, the group will get to co-host a dinner party and our group will double in size for the night.</div>
+            <div style="font-family:'Archivo',sans-serif; font-size:13px; line-height:1.55; color:#3a322c; margin-top:5px;">Get to know each other first, but toward the end of camp, the group will get a chance to co-host a dinner party and invite people they want for one fun hurrah.</div>
           </div>
         </div>
       </div>
@@ -345,9 +345,10 @@
         <div style="display:flex; align-items:center; gap:10px; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#ff5232;"><span style="width:9px; height:9px; border-radius:50%; background:#ff5232;"></span>Locked in</div>
         <div style="margin-top:14px; font-family:'Archivo',sans-serif; font-weight:900; font-size:30px; letter-spacing:-0.03em; line-height:1;">Welcome aboard, <span data-name>friend</span>.</div>
         <p style="margin:14px 0 0; font-family:'Archivo',sans-serif; font-size:15px; line-height:1.5; color:#3a322c;">We will send the address and the rest privately as the date gets close.</p>
-        <p style="margin:12px 0 0; font-family:'Space Mono',monospace; font-size:11px; line-height:1.7; letter-spacing:0.02em; color:#6b6258;">Questions? Reach out to <span style="color:#1b1714; font-weight:700;">Henry</span> anytime.</p>
+        <p style="margin:12px 0 0; font-family:'Space Mono',monospace; font-size:11px; line-height:1.7; letter-spacing:0.02em; color:#6b6258;">Text Henry or email <span style="color:#1b1714; font-weight:700;">henry@rndv.world</span>.</p>
         <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-          <a id="cal-link" download="camp-august-26.ics" href="#" style="display:inline-flex; align-items:center; gap:8px; background:#1b1714; color:#f3f0ea; text-decoration:none; font-family:'Space Mono',monospace; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:12px 16px; cursor:pointer;">Add to calendar</a>
+          <a id="cal-link" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Camp%20August%20%2726%20(RNDV)&amp;dates=20260803/20260813&amp;location=Los%20Angeles&amp;details=Ten%20days.%20Address%20arrives%20privately%20closer%20to%20the%20date.%20Questions%3A%20henry%40rndv.world" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; background:#1b1714; color:#f3f0ea; text-decoration:none; font-family:'Space Mono',monospace; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:12px 16px; cursor:pointer;">Add to Google Calendar</a>
+          <a id="ics-link" download="camp-august-26.ics" href="#" style="color:#6b6258; font-family:'Space Mono',monospace; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; text-decoration:underline; cursor:pointer;">Apple / .ics</a>
           <button type="button" id="edit-again" style="background:transparent; border:1px solid rgba(27,23,20,0.3); color:#6b6258; cursor:pointer; font-family:'Space Mono',monospace; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:11px 16px;">&larr; Edit response</button>
         </div>
       </div>
@@ -355,7 +356,7 @@
 
     <!-- footer -->
     <footer class="pad-section" style="padding:34px 22px 46px; border-top:1px solid #1b1714; text-align:center;">
-      <div class="stitch" style="display:inline-block; font-family:'Pinyon Script',cursive; font-size:42px; line-height:1;">Rendezvous</div>
+      <div class="stitch" style="display:inline-block; font-family:'Pinyon Script',cursive; font-size:42px; line-height:1; padding-bottom:0.24em; margin-bottom:-0.24em;">Rendezvous</div>
       <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#6b6258; margin-top:16px; line-height:1.9;">Camp August '26 &middot; Los Angeles &middot; MMXXVI<br>By invitation only &middot; henry@rndv.world</div>
     </footer>
 
@@ -749,11 +750,13 @@
     "END:VEVENT",
     "END:VCALENDAR"
   ].join("\r\n");
+  // Primary button (cal-link) is a plain Google Calendar template link, no JS needed.
+  // The secondary Apple/.ics link serves the file as a Blob download
+  // (iOS Safari blocks data: navigation, so a data: href alone is not enough).
   var calLink = document.getElementById("cal-link");
-  // data: URI kept as an href fallback, but iOS Safari blocks data: navigation,
-  // so the click handler serves the .ics as a Blob download instead.
-  calLink.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ICS);
-  calLink.addEventListener("click", function (e) {
+  var icsLink = document.getElementById("ics-link");
+  icsLink.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ICS);
+  icsLink.addEventListener("click", function (e) {
     e.preventDefault();
     try {
       var blob = new Blob([ICS], { type: "text/calendar;charset=utf-8" });
@@ -765,7 +768,7 @@
       a.click();
       setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 1000);
     } catch (err) {
-      window.location.href = calLink.getAttribute("href");
+      window.location.href = icsLink.getAttribute("href");
     }
   });
   calLink.addEventListener("mouseenter", function () { calLink.style.background = SIGNAL; calLink.style.color = "#ffffff"; });
