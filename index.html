@@ -194,8 +194,8 @@
         <div style="padding:14px 22px 20px;">
           <div style="height:34px; background-image:repeating-linear-gradient(90deg, #f3f0ea 0 2px, transparent 2px 4px, #f3f0ea 4px 5px, transparent 5px 9px, #f3f0ea 9px 12px, transparent 12px 14px);"></div>
           <div style="display:flex; justify-content:space-between; margin-top:8px; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:#8a7f73;">
-            <span>RNDV&middot;CAMP001&middot;PH1</span>
-            <span>Location private until RSVP</span>
+            <span>CAMP&nbsp;RNDV&nbsp;826</span>
+            <span>Location sent closer to the date</span>
           </div>
         </div>
       </div>
@@ -212,6 +212,7 @@
           <span style="width:14px; height:14px; flex:none; background:#ff5232; margin-top:2px;"></span>
           <div>
             <div style="font-family:'Archivo',sans-serif; font-weight:700; font-size:15px; line-height:1.45; color:#1b1714;">Make the most of these ten days in LA.</div>
+            <div style="font-family:'Archivo',sans-serif; font-size:13px; line-height:1.55; color:#3a322c; margin-top:5px;">We'll have guests, mentors, and friends around to help, but this camp is ultimately what we make of it.</div>
           </div>
         </div>
         <div style="display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid rgba(27,23,20,0.14);">
@@ -322,6 +323,11 @@
           <button type="button" class="fmt-btn" data-fmt="Short form" style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; padding:14px 6px; border:1px solid #1b1714; background:#ffffff; color:#1b1714; cursor:pointer;">Short form</button>
           <button type="button" class="fmt-btn" data-fmt="Live streams" style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; padding:14px 6px; border:1px solid #1b1714; background:#ffffff; color:#1b1714; cursor:pointer;">Live streams</button>
         </div>
+        </div>
+
+        <div class="field field-wide">
+        <label style="display:block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6b6258; margin-bottom:8px;">What part of content creation are you the best at?</label>
+        <input class="rndv-input" name="bestAt" type="text" placeholder="Ideas, filming, editing, hosting, storytelling" style="width:100%; background:#ffffff; border:1px solid #1b1714; color:#1b1714; font-size:14px; padding:13px 14px; margin-bottom:24px; outline:none;">
         </div>
 
         <div class="field field-wide">
@@ -686,6 +692,7 @@
       "Six months out: " + (data.sixMonths || ""),
       "Camp goal: " + (data.campGoal || ""),
       "Sounds fun to make: " + (data.funFormats || ""),
+      "Best at: " + (data.bestAt || ""),
       "Are you ready: " + (data.comfortZone || "")
     ];
     var href = "mailto:" + RSVP_EMAIL
