@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Camp August '26 · Briefing</title>
+<meta name="description" content="Pre-flight briefing: what to expect, what to pack, and the last few things we need from you.">
+<meta property="og:title" content="Camp August '26 · Briefing">
+<meta property="og:description" content="Final boarding call. What to expect, what to pack, and the questionnaire.">
+<meta property="og:image" content="https://camp.rndv.world/og-image.png">
+<meta property="og:url" content="https://camp.rndv.world/briefing">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Pinyon+Script&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:#f3f0ea; --card:#ffffff; --ink:#1b1714; --muted:#6b6258; --faint:#8a7f73;
+    --line:#d9d2c7; --dash:#4a423b; --accent:#ff5232; --soft:#3a322c;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    background:var(--paper); color:var(--ink);
+    font-family:'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.65;
+  }
+  input, textarea, button { font-family:inherit; }
+  .mono { font-family:'Space Mono', monospace; }
+  .wrap { max-width:760px; margin:0 auto; padding:0 22px; }
+  @media (min-width:700px){ .wrap { padding:0 32px; } }
+
+  /* header */
+  .top {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 0 16px; border-bottom:1px solid var(--line);
+  }
+  .top .brand { font-weight:900; font-size:17px; letter-spacing:.02em; }
+  .top .brand sup { font-size:9px; }
+  .top .plat { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--faint); text-transform:uppercase; }
+
+  /* hero */
+  .hero { padding:52px 0 8px; }
+  .kicker {
+    font-family:'Space Mono',monospace; font-size:11px; font-weight:700;
+    letter-spacing:.22em; color:var(--accent); text-transform:uppercase;
+  }
+  .hero h1 {
+    font-weight:900; font-size:clamp(38px,9vw,64px); line-height:1.02;
+    letter-spacing:-0.02em; margin:14px 0 10px;
+  }
+  .hero .sub { color:var(--muted); font-size:16px; max-width:52ch; }
+
+  /* boarding strip */
+  .strip {
+    background:var(--card); border:1px solid var(--ink); margin:30px 0 6px;
+  }
+  .strip-row {
+    display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+    padding:16px 20px; border-bottom:1px dashed var(--dash); flex-wrap:wrap;
+  }
+  .strip-row:last-child { border-bottom:none; }
+  .lab { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.18em; color:var(--faint); text-transform:uppercase; display:block; margin-bottom:3px; }
+  .val { font-family:'Space Mono',monospace; font-size:15px; font-weight:700; letter-spacing:.02em; }
+  .val.big { font-size:clamp(20px,5vw,28px); color:var(--accent); }
+  .barcode {
+    height:34px; margin:0 20px 16px;
+    background:repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 7px, transparent 7px 8px, var(--ink) 8px 9px, transparent 9px 13px);
+  }
+  .barcode-code { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.3em; color:var(--faint); padding:0 20px 14px; }
+
+  /* section chips nav */
+  .jump { display:flex; gap:8px; flex-wrap:wrap; margin:22px 0 0; }
+  .jump a {
+    font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--soft); border:1px solid var(--line); background:var(--card);
+    padding:8px 12px; text-decoration:none;
+  }
+  .jump a:hover { border-color:var(--ink); }
+
+  /* sections */
+  section { padding:58px 0 6px; }
+  .sec-head { display:flex; align-items:baseline; gap:14px; margin-bottom:22px; }
+  .sec-num { font-family:'Space Mono',monospace; font-weight:700; font-size:13px; color:var(--accent); letter-spacing:.1em; }
+  .sec-head h2 { font-weight:900; font-size:clamp(26px,6vw,36px); letter-spacing:-0.01em; }
+  .prose p { margin-bottom:18px; font-size:16.5px; color:var(--soft); }
+  .prose p.lead { font-size:19px; color:var(--ink); font-weight:500; }
+
+  /* know card */
+  .card {
+    background:var(--card); border:1px solid var(--ink); padding:22px 22px 8px; margin:26px 0;
+  }
+  .card h3 { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; margin-bottom:14px; }
+  .know li {
+    list-style:none; display:flex; gap:12px; padding:11px 0; border-top:1px dashed var(--line);
+    font-size:15px; color:var(--soft);
+  }
+  .know li::before { content:""; flex:0 0 8px; height:8px; background:var(--accent); margin-top:7px; }
+  .discord-btn {
+    display:none; margin:6px 0 16px; font-family:'Space Mono',monospace; font-size:12px; font-weight:700;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--card); background:var(--ink);
+    padding:12px 18px; text-decoration:none;
+  }
+  .discord-btn.show { display:inline-block; }
+
+  /* packing */
+  .pack-progress { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:6px; }
+  .pack li { list-style:none; border-top:1px dashed var(--line); }
+  .pack label {
+    display:flex; gap:14px; align-items:flex-start; padding:12px 2px; cursor:pointer; font-size:15.5px; color:var(--soft);
+  }
+  .pack input { position:absolute; opacity:0; }
+  .box {
+    flex:0 0 20px; height:20px; border:1.5px solid var(--ink); background:var(--card);
+    display:flex; align-items:center; justify-content:center; margin-top:2px; transition:background .12s;
+  }
+  .box::after { content:"✕"; font-size:12px; font-weight:700; color:#fff; opacity:0; }
+  .pack input:checked + .box { background:var(--accent); border-color:var(--accent); }
+  .pack input:checked + .box::after { opacity:1; }
+  .pack input:checked ~ .ptext { color:var(--faint); text-decoration:line-through; text-decoration-color:var(--faint); }
+  .covered { font-size:14.5px; color:var(--muted); padding:14px 2px 12px; border-top:1px solid var(--line); margin-top:4px; }
+
+  /* form */
+  .q { margin-bottom:26px; }
+  .q-label { font-weight:700; font-size:15.5px; margin-bottom:4px; display:block; }
+  .q-help { font-size:13.5px; color:var(--muted); margin-bottom:10px; }
+  .rndv-input {
+    width:100%; background:var(--card); border:1px solid var(--ink); color:var(--ink);
+    font-size:14px; padding:13px 14px; outline:none;
+  }
+  .rndv-input:focus { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
+  textarea.rndv-input { resize:none; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip {
+    font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.04em;
+    border:1px solid var(--ink); background:var(--card); color:var(--ink);
+    padding:10px 14px; cursor:pointer; transition:all .12s;
+  }
+  .chip.on { background:var(--ink); color:var(--card); }
+  .chip.on.hot { background:var(--accent); border-color:var(--accent); }
+  .req { color:var(--accent); }
+  .send {
+    width:100%; border:none; background:var(--accent); color:#fff; font-weight:800;
+    font-size:16px; letter-spacing:.04em; padding:17px; cursor:pointer; margin-top:8px;
+  }
+  .send:hover { background:#e5411f; }
+  .send[disabled] { opacity:.6; cursor:wait; }
+  .form-note { font-family:'Space Mono',monospace; font-size:10.5px; letter-spacing:.06em; color:var(--faint); margin-top:12px; text-align:center; }
+  .draft-note { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.1em; color:var(--faint); text-transform:uppercase; text-align:right; height:14px; opacity:0; transition:opacity .3s; }
+  .draft-note.show { opacity:1; }
+  .err { border:1px solid var(--accent); background:#fff4f1; color:var(--soft); font-size:14px; padding:12px 14px; margin-bottom:16px; display:none; }
+
+  /* confirmed */
+  #confirmed { display:none; text-align:center; padding:46px 0 10px; }
+  #confirmed .script {
+    font-family:'Pinyon Script',cursive; font-size:clamp(44px,10vw,64px); line-height:1.05;
+    display:inline-block; padding-bottom:.24em; margin-bottom:-0.1em;
+  }
+  #confirmed p { color:var(--muted); font-size:15.5px; margin-top:10px; }
+  #confirmed .edit { display:inline-block; margin-top:22px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--soft); text-decoration:underline; cursor:pointer; }
+
+  /* footer */
+  footer { margin-top:70px; border-top:1px solid var(--line); padding:36px 0 60px; text-align:center; }
+  footer .script { font-family:'Pinyon Script',cursive; font-size:40px; display:inline-block; line-height:1; padding-bottom:.24em; margin-bottom:-0.1em; }
+  footer .fine { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin-top:10px; }
+
+  /* entrance */
+  .rise { opacity:0; transform:translateY(14px); animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards; }
+  @keyframes rise { to { opacity:1; transform:none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="brand">RNDV<sup>®</sup></div>
+    <div class="plat">Platform 001 · Pre-Flight</div>
+  </div>
+
+  <div class="hero">
+    <div class="kicker rise">Final Boarding Call</div>
+    <h1 class="rise" style="animation-delay:.08s">Camp August '26</h1>
+    <p class="sub rise" style="animation-delay:.16s">The pre-flight briefing: what to expect, what to pack, and the last few things we need from you.</p>
+
+    <div class="strip rise" style="animation-delay:.24s">
+      <div class="strip-row">
+        <div><span class="lab">Passenger</span><span class="val" id="pax">FRIEND</span></div>
+        <div><span class="lab">Destination</span><span class="val">LOS ANGELES</span></div>
+        <div><span class="lab">Dates</span><span class="val">AUG 3 – 12</span></div>
+      </div>
+      <div class="strip-row">
+        <div><span class="lab">Status</span><span class="val big" id="countdown">T-MINUS — DAYS</span></div>
+      </div>
+      <div class="barcode"></div>
+      <div class="barcode-code">CAMP RNDV 826</div>
+    </div>
+
+    <nav class="jump rise" style="animation-delay:.32s">
+      <a href="#briefing">01 · The Briefing</a>
+      <a href="#packing">02 · The Packing List</a>
+      <a href="#questionnaire">03 · The Questionnaire</a>
+    </nav>
+  </div>
+
+  <section id="briefing">
+    <div class="sec-head"><span class="sec-num">01</span><h2>The Briefing</h2></div>
+    <div class="prose">
+      <p class="lead">We are now 5 days away from camp.</p>
+      <p>I'm sure some of you have been wondering what's in store. We'll have an orientation day once you touchdown, but I can reveal a few more things now. The number one thing I want you all to prepare for is long days. Catch up on your sleep before you get here. If you're flying internationally or have a time zone shift, have a game plan for jet lag. We'll start our days like clockwork at 8:30 AM PST, and almost every evening will be left wide open for adventures, filming, and work sessions. Whether it's fostering a connection or staying up to brainstorm or edit, I highly encourage everyone to take advantage of every moment.</p>
+      <p>Most days will contain a workshop, free time to film and create content, and a group activity. Upon arrival, you'll find that our schedule is neither that long nor that rigid by design, but the spirit of this camp is to push ourselves together - it's what we make of the sandbox. A few of the bigger moments, without spoiling anything: a creative challenge, a couple of full production days with a crew in the house, one full day out in LA, and toward the end, a screening night where we all watch everything everyone made.</p>
+      <p>Over the course of 10 days, we'll be betting on ourselves and each other. The camp attendees, as well as the mentors, are all converging from various walks of life to create. This ecosystem is designed to be a melting pot - what can come out of 10 aspirational, ambitious, and hard working humans who come together to connect and create?</p>
+      <p>I still won't reveal who everyone attending is, but what we all have in common is that we're all taking a risk to try and make what we enjoy our main endeavor through creating content. So then bring your A-game and let's take steps toward making our wildest dreams come true.</p>
+      <p>One honest update: I tried hard to get us Head in the Clouds tickets for that Saturday and couldn't make it happen. I tapped the heads of 88, and ticketing is just all being handled by AEG this year (the entire team quit 88-rising together this year). We're going to make the most of that day another way, and I have some ideas :)</p>
+      <p>The place we'll be calling home is located 2 minutes away from Century City (very central).</p>
+    </div>
+
+    <div class="card">
+      <h3>Know before you land</h3>
+      <ul class="know">
+        <li>Doors open Sunday Aug 3 from 3pm. We're all having dinner together that first night.</li>
+        <li>Pickups run from LAX and BUR. If your flight gets delayed or plans change, just text me. Nobody is getting stranded.</li>
+        <li>The address gets sent privately closer to the date, and it stays off socials completely. That's a promise we made to the house owner.</li>
+        <li>Flying out: we recommend the morning of Aug 13. Evening of the 12th works too, just less ideal.</li>
+        <li>Any other questions: drop them in the Discord or text me. Seriously, ask anything.</li>
+      </ul>
+      <a class="discord-btn" id="discordBtn" href="#" target="_blank" rel="noopener">Join the camp Discord →</a>
+    </div>
+  </section>
+
+  <section id="packing">
+    <div class="sec-head"><span class="sec-num">02</span><h2>The Packing List</h2></div>
+    <div class="prose">
+      <p>You're here for 10 days, but the house has laundry, so pack lighter than you think.</p>
+    </div>
+    <div class="card">
+      <div class="pack-progress" id="packProgress">0 of 11 packed</div>
+      <ul class="pack" id="packList"></ul>
+      <div class="covered"><strong>Already covered, leave at home:</strong> bedding, towels, groceries.</div>
+    </div>
+    <div class="prose">
+      <p>Underwear is important, but the most valuable things you can arrive at camp with are ideas that you're excited about or interested in making. Our workshops and guests are all here to help, but I personally think that the more conceptual firepower you come with, the more successful every work session will be. All great videos begin with an idea. We'll have experts in pre-production, execution, and post at some point help augment wherever you are in your journey as a creator today.</p>
+    </div>
+  </section>
+
+  <section id="questionnaire">
+    <div class="sec-head"><span class="sec-num">03</span><h2>The Questionnaire</h2></div>
+    <div class="prose">
+      <p>Last form before camp, I promise. The travel section is the one I really need: I'm scheduling airport pickups off of these answers, so please get this in tonight if you can.</p>
+    </div>
+
+    <form id="qform" class="card" style="padding:26px 22px 24px;">
+      <div class="err" id="formErr"></div>
+
+      <div class="q">
+        <label class="q-label">Flying or driving to LA? <span class="req">*</span></label>
+        <div class="chips" data-chips="travelMode">
+          <button type="button" class="chip">Flying</button>
+          <button type="button" class="chip">Driving</button>
+        </div>
+      </div>
+
+      <div class="q">
+        <label class="q-label">Which arrival window are you landing in? <span class="req">*</span></label>
+        <div class="q-help">Landing Aug 3? Try to land between 12pm and 6pm at LAX or BUR.</div>
+        <div class="chips" data-chips="arrivalWindow">
+          <button type="button" class="chip">Before noon</button>
+          <button type="button" class="chip">12–3pm</button>
+          <button type="button" class="chip">3–6pm</button>
+          <button type="button" class="chip">After 6pm</button>
+          <button type="button" class="chip">Driving in</button>
+          <button type="button" class="chip">Haven't booked yet</button>
+        </div>
+      </div>
+
+      <div class="q">
+        <label class="q-label" for="f-flight">Airline + flight number + landing time</label>
+        <input class="rndv-input" id="f-flight" name="flightDetails" type="text" placeholder="e.g. WS 1424, lands 4:00pm at LAX">
+      </div>
+
+      <div class="q">
+        <label class="q-label" for="f-departure">Departure date and time</label>
+        <div class="q-help">Flight number too if it's booked.</div>
+        <input class="rndv-input" id="f-departure" name="departure" type="text" placeholder="e.g. Aug 13 morning, WS 1425 at 10am">
+      </div>
+
+      <div class="q">
+        <label class="q-label" for="f-phone">Best phone number for day-of coordination <span class="req">*</span></label>
+        <input class="rndv-input" id="f-phone" name="phone" type="tel" placeholder="So we can find you at the airport">
+      </div>
+
+      <div class="q">
+        <label class="q-label" for="f-gear">What gear are you bringing?</label>
+        <div class="q-help">Camera, laptop, mics, lights, anything. Your phone is enough, we just want to know what the house has to work with.</div>
+        <textarea class="rndv-input" id="f-gear" name="gear" rows="2" placeholder="The honest inventory"></textarea>
+      </div>
+
+      <div class="q">
+        <label class="q-label">What's your role in the friend group?</label>
+        <div class="chips" data-chips="friendRole">
+          <button type="button" class="chip">The planner</button>
+          <button type="button" class="chip">The menace</button>
+          <button type="button" class="chip">The mom</button>
+          <button type="button" class="chip">The DJ</button>
+          <button type="button" class="chip">The one who's late</button>
+        </div>
+        <input class="rndv-input" id="f-roleCustom" name="friendRoleCustom" type="text" placeholder="Or your own words" style="margin-top:10px;">
+      </div>
+
+      <div class="q">
+        <label class="q-label" for="f-weird">What are you weirdly good at that has nothing to do with content?</label>
+        <input class="rndv-input" id="f-weird" name="weirdlyGood" type="text" placeholder="Anything counts">
+      </div>
+
+      <div class="q">
+        <label class="q-label" for="f-words">Describe yourself in three words.</label>
+        <div class="q-help">Bonus points if one of them would surprise us.</div>
+        <input class="rndv-input" id="f-words" name="threeWords" type="text" placeholder="___ , ___ , ___">
+      </div>
+
+      <div class="q">
+        <label class="q-label" for="f-song">Give me one song that has to be on the camp playlist.</label>
+        <input class="rndv-input" id="f-song" name="playlistSong" type="text" placeholder="Song + artist">
+      </div>
+
+      <button class="send" id="sendBtn" type="submit">Send it in</button>
+      <div class="form-note">Answers save on this device as you type, so you can come back and finish anytime.</div>
+      <div class="draft-note" id="draftNote">Draft saved</div>
+    </form>
+
+    <div id="confirmed">
+      <div class="script">Locked in</div>
+      <p id="confirmedMsg">See you Sunday. Text Henry or email henry@rndv.world if anything changes.</p>
+      <span class="edit" id="editBtn">← Edit your answers</span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="script">Rendezvous</div>
+    <div class="fine">Camp August '26 · Los Angeles · MMXXVI</div>
+    <div class="fine">By invitation only · henry@rndv.world</div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- config ---------- */
+  var SUPABASE_URL = "https://yjarnjcwkossvxyxnklg.supabase.co";
+  var SUPABASE_KEY = "sb_publishable_phUO3GH0lbQepsrSVfDfUQ_8R_5-VgK";
+  var TABLE = "briefing_responses";
+  var DISCORD_URL = ""; /* paste the Discord invite here and redeploy to light up the button */
+  var CAMP_START = new Date(2026, 7, 3); /* Aug 3 2026, local time */
+  var CAMP_END = new Date(2026, 7, 13);
+
+  /* ---------- name personalization (same params as The Pass) ---------- */
+  function titleCase(s) {
+    return s.replace(/[^\s]+/g, function (w) { return w.charAt(0).toUpperCase() + w.slice(1); });
+  }
+  var params = new URLSearchParams(location.search);
+  var rawName = (params.get("name") || "friend").trim();
+  var name = titleCase(rawName);
+  document.getElementById("pax").textContent = name.toUpperCase();
+  var passNo = params.get("no") || "";
+  var storeKey = "rndv-briefing::" + rawName.toLowerCase();
+
+  /* ---------- countdown ---------- */
+  var cd = document.getElementById("countdown");
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var days = Math.round((CAMP_START - today) / 86400000);
+  if (days > 1) cd.textContent = "T-MINUS " + days + " DAYS";
+  else if (days === 1) cd.textContent = "T-MINUS 1 DAY";
+  else if (days === 0) cd.textContent = "IT'S TODAY. SEE YOU AT THE HOUSE.";
+  else if (today < CAMP_END) cd.textContent = "CAMP IS IN SESSION";
+  else cd.textContent = "CAMP 001 · FLOWN";
+
+  /* ---------- discord ---------- */
+  if (DISCORD_URL) {
+    var db = document.getElementById("discordBtn");
+    db.href = DISCORD_URL;
+    db.classList.add("show");
+  }
+
+  /* ---------- packing list ---------- */
+  var PACK = [
+    "Clothes for 5-6 days (laundry is on site, nobody is counting outfits)",
+    "Swimsuit",
+    "One decent dinner outfit (you'll want it for at least one night)",
+    "Your gear: camera, laptop, mics, whatever you create with (your phone counts)",
+    "All your chargers and cables",
+    "Any meds, contacts, that kind of stuff",
+    "Toiletries",
+    "Comfortable shoes (we'll be on our feet a lot)",
+    "A layer for nights, LA cools off after dark",
+    "Sunscreen",
+    "ID. Passport if you're coming from Canada or Australia"
+  ];
+  var packState = {};
+  try { packState = JSON.parse(localStorage.getItem(storeKey + "::pack") || "{}"); } catch (e) {}
+  var packList = document.getElementById("packList");
+  var packProgress = document.getElementById("packProgress");
+  PACK.forEach(function (item, i) {
+    var li = document.createElement("li");
+    var label = document.createElement("label");
+    var input = document.createElement("input");
+    input.type = "checkbox";
+    input.checked = !!packState[i];
+    var box = document.createElement("span"); box.className = "box";
+    var text = document.createElement("span"); text.className = "ptext"; text.textContent = item;
+    input.addEventListener("change", function () {
+      packState[i] = input.checked;
+      try { localStorage.setItem(storeKey + "::pack", JSON.stringify(packState)); } catch (e) {}
+      updatePackProgress();
+    });
+    label.appendChild(input); label.appendChild(box); label.appendChild(text);
+    li.appendChild(label); packList.appendChild(li);
+  });
+  function updatePackProgress() {
+    var n = 0;
+    for (var k in packState) if (packState[k]) n++;
+    packProgress.textContent = n + " of " + PACK.length + " packed";
+  }
+  updatePackProgress();
+
+  /* ---------- form state: chips + autosave ---------- */
+  var form = document.getElementById("qform");
+  var chipValues = {};
+  var draft = {};
+  try { draft = JSON.parse(localStorage.getItem(storeKey + "::draft") || "{}"); } catch (e) {}
+
+  var draftNote = document.getElementById("draftNote");
+  var draftTimer = null;
+  function saveDraft() {
+    var data = collect();
+    try { localStorage.setItem(storeKey + "::draft", JSON.stringify(data)); } catch (e) {}
+    draftNote.classList.add("show");
+    clearTimeout(draftTimer);
+    draftTimer = setTimeout(function () { draftNote.classList.remove("show"); }, 1200);
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-chips]"), function (group) {
+    var key = group.getAttribute("data-chips");
+    Array.prototype.forEach.call(group.querySelectorAll(".chip"), function (chip) {
+      chip.addEventListener("click", function () {
+        var already = chip.classList.contains("on");
+        Array.prototype.forEach.call(group.querySelectorAll(".chip"), function (c) { c.classList.remove("on", "hot"); });
+        if (!already) {
+          chip.classList.add("on");
+          if (key === "travelMode" || key === "arrivalWindow") chip.classList.add("hot");
+          chipValues[key] = chip.textContent;
+        } else {
+          delete chipValues[key];
+        }
+        saveDraft();
+      });
+    });
+  });
+
+  Array.prototype.forEach.call(form.querySelectorAll(".rndv-input"), function (el) {
+    el.addEventListener("input", saveDraft);
+  });
+
+  function collect() {
+    return {
+      travelMode: chipValues.travelMode || "",
+      arrivalWindow: chipValues.arrivalWindow || "",
+      flightDetails: form.flightDetails.value.trim(),
+      departure: form.departure.value.trim(),
+      phone: form.phone.value.trim(),
+      gear: form.gear.value.trim(),
+      friendRole: chipValues.friendRole || "",
+      friendRoleCustom: form.friendRoleCustom.value.trim(),
+      weirdlyGood: form.weirdlyGood.value.trim(),
+      threeWords: form.threeWords.value.trim(),
+      playlistSong: form.playlistSong.value.trim()
+    };
+  }
+
+  /* restore draft */
+  (function restore() {
+    ["flightDetails","departure","phone","gear","friendRoleCustom","weirdlyGood","threeWords","playlistSong"].forEach(function (k) {
+      if (draft[k]) form[k].value = draft[k];
+    });
+    ["travelMode","arrivalWindow","friendRole"].forEach(function (k) {
+      if (!draft[k]) return;
+      var group = document.querySelector('[data-chips="' + k + '"]');
+      Array.prototype.forEach.call(group.querySelectorAll(".chip"), function (chip) {
+        if (chip.textContent === draft[k]) {
+          chip.classList.add("on");
+          if (k === "travelMode" || k === "arrivalWindow") chip.classList.add("hot");
+          chipValues[k] = chip.textContent;
+        }
+      });
+    });
+  })();
+
+  /* ---------- confirmed state ---------- */
+  var confirmedEl = document.getElementById("confirmed");
+  var confirmedMsg = document.getElementById("confirmedMsg");
+  function showConfirmed() {
+    form.style.display = "none";
+    confirmedEl.style.display = "block";
+    confirmedMsg.textContent = "See you Sunday, " + name + ". Text Henry or email henry@rndv.world if anything changes.";
+  }
+  if (localStorage.getItem(storeKey + "::submitted")) showConfirmed();
+  document.getElementById("editBtn").addEventListener("click", function () {
+    confirmedEl.style.display = "none";
+    form.style.display = "block";
+    window.location.hash = "questionnaire";
+  });
+
+  /* ---------- submit ---------- */
+  var err = document.getElementById("formErr");
+  var sendBtn = document.getElementById("sendBtn");
+
+  function mailtoFallback(data) {
+    var lines = ["Camp briefing questionnaire - " + name, ""];
+    for (var k in data) lines.push(k + ": " + (data[k] || "-"));
+    location.href = "mailto:henry@rndv.world?subject=" +
+      encodeURIComponent("Camp briefing - " + name) + "&body=" +
+      encodeURIComponent(lines.join("\n"));
+  }
+
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    err.style.display = "none";
+    var data = collect();
+
+    var missing = [];
+    if (!data.travelMode) missing.push("flying or driving");
+    if (!data.arrivalWindow) missing.push("your arrival window");
+    if (!data.phone) missing.push("your phone number");
+    if (missing.length) {
+      err.textContent = "Almost there, I just really need: " + missing.join(", ") + ".";
+      err.style.display = "block";
+      err.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Sending…";
+
+    var payload = {
+      name: name,
+      payload: {
+        passNo: passNo,
+        answers: data,
+        submittedAt: new Date().toISOString(),
+        page: "briefing"
+      }
+    };
+
+    fetch(SUPABASE_URL + "/rest/v1/" + TABLE, {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify(payload)
+    }).then(function (res) {
+      if (!res.ok) throw new Error("insert failed: " + res.status);
+      try { localStorage.setItem(storeKey + "::submitted", new Date().toISOString()); } catch (e) {}
+      showConfirmed();
+      window.scrollTo({ top: confirmedEl.offsetTop - 80, behavior: "smooth" });
+    }).catch(function () {
+      /* never lose an answer: fall back to a pre-filled email */
+      err.textContent = "Hmm, the form pipe hiccuped. I opened an email with your answers pre-filled, just hit send there.";
+      err.style.display = "block";
+      mailtoFallback(data);
+    }).finally(function () {
+      sendBtn.disabled = false;
+      sendBtn.textContent = "Send it in";
+    });
+  });
+})();
+</script>
+</body>
+</html>
