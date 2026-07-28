@@ -80,8 +80,14 @@
 
   /* sections */
   section { padding:58px 0 6px; }
-  .sec-head { display:flex; align-items:baseline; gap:14px; margin-bottom:22px; }
-  .sec-num { font-family:'Space Mono',monospace; font-weight:700; font-size:13px; color:var(--accent); letter-spacing:.1em; }
+  .sec-head { margin-bottom:22px; }
+  .sec-num { display:block; font-family:'Space Mono',monospace; font-weight:700; font-size:13px; color:var(--accent); letter-spacing:.1em; margin-bottom:8px; }
+  .prose ol { margin:0 0 18px; padding:0; list-style:none; counter-reset:bnum; }
+  .prose ol li { counter-increment:bnum; position:relative; padding-left:36px; margin-bottom:16px; font-size:16.5px; color:var(--soft); }
+  .prose ol li::before {
+    content:counter(bnum, decimal-leading-zero); position:absolute; left:0; top:3px;
+    font-family:'Space Mono',monospace; font-size:12px; font-weight:700; color:var(--accent);
+  }
   .sec-head h2 { font-weight:900; font-size:clamp(26px,6vw,36px); letter-spacing:-0.01em; }
   .prose p { margin-bottom:18px; font-size:16.5px; color:var(--soft); }
   .prose p.lead { font-size:19px; color:var(--ink); font-weight:500; }
@@ -205,9 +211,11 @@
   <section id="briefing">
     <div class="sec-head"><span class="sec-num">01</span><h2>The Briefing</h2></div>
     <div class="prose">
-      <p class="lead">We are now 5 days away from camp.</p>
-      <p>I'm sure some of you have been wondering what's in store. We'll have an orientation day once you touchdown, but I can reveal a few more things now. The number one thing I want you all to prepare for is long days. Catch up on your sleep before you get here. If you're flying internationally or have a time zone shift, have a game plan for jet lag. We'll start our days like clockwork at 8:30 AM PST, and almost every evening will be left wide open for adventures, filming, and work sessions. Whether it's fostering a connection or staying up to brainstorm or edit, I highly encourage everyone to take advantage of every moment.</p>
-      <p>Most days will contain a workshop, free time to film and create content, and a group activity. Upon arrival, you'll find that our schedule is neither that long nor that rigid by design, but the spirit of this camp is to push ourselves together - it's what we make of the sandbox. A few of the bigger moments, without spoiling anything: a creative challenge, a couple of full production days with a crew in the house, one full day out in LA, and toward the end, a screening night where we all watch everything everyone made.</p>
+      <p>I'm sure some of you have been wondering what's in store. We'll have an orientation day after everyone arrives at the house, but I can reveal a few more general things now.</p>
+      <ol>
+        <li>Catch up on your sleep before you get here. If you're flying internationally or have a time zone shift, have a game plan for jet lag. We'll start our days like clockwork at 8:30 AM PST, and almost every evening will be left wide open for adventures, filming, and work sessions. Whether it's fostering a connection or staying up to brainstorm or edit, I highly encourage everyone to take advantage of every moment.</li>
+        <li><strong>Run of show</strong> - Most days will contain workshops, free time to film and create content, and a group recreational activity. Upon arrival, you'll find that our schedule is neither that long nor that rigid by design, but the spirit of this environment is to push ourselves together - it's what we make of the sandbox. A few of the bigger moments, without spoiling anything: a multi-day group creative challenge, a couple of full content days with light support &amp; crew, a dinner party for everyone to channel their social energy, and toward the end, a screening night where we all watch everything everyone made.</li>
+      </ol>
       <p>Over the course of 10 days, we'll be betting on ourselves and each other. The camp attendees, as well as the mentors, are all converging from various walks of life to create. This ecosystem is designed to be a melting pot - what can come out of 10 aspirational, ambitious, and hard working humans who come together to connect and create?</p>
       <p>I still won't reveal who everyone attending is, but what we all have in common is that we're all taking a risk to try and make what we enjoy our main endeavor through creating content. So then bring your A-game and let's take steps toward making our wildest dreams come true.</p>
       <p>One honest update: I tried hard to get us Head in the Clouds tickets for that Saturday and couldn't make it happen. I tapped the heads of 88, and ticketing is just all being handled by AEG this year (the entire team quit 88-rising together this year). We're going to make the most of that day another way, and I have some ideas :)</p>
@@ -370,8 +378,8 @@
   var now = new Date();
   var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   var days = Math.round((CAMP_START - today) / 86400000);
-  if (days > 1) cd.textContent = "T-MINUS " + days + " DAYS";
-  else if (days === 1) cd.textContent = "T-MINUS 1 DAY";
+  if (days > 1) cd.textContent = "T-" + days + " DAYS";
+  else if (days === 1) cd.textContent = "T-1 DAY";
   else if (days === 0) cd.textContent = "IT'S TODAY. SEE YOU AT THE HOUSE.";
   else if (today < CAMP_END) cd.textContent = "CAMP IS IN SESSION";
   else cd.textContent = "CAMP 001 · FLOWN";
