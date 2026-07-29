@@ -360,8 +360,7 @@
     </form>
 
     <div id="confirmed">
-      <div class="script">Locked in</div>
-      <p id="confirmedMsg">See you Monday.</p>
+      <div class="script">See you soon</div>
       <span class="edit" id="editBtn">← Edit your answers</span>
     </div>
   </section>
@@ -529,11 +528,9 @@
 
   /* ---------- confirmed state ---------- */
   var confirmedEl = document.getElementById("confirmed");
-  var confirmedMsg = document.getElementById("confirmedMsg");
   function showConfirmed() {
     form.style.display = "none";
     confirmedEl.style.display = "block";
-    confirmedMsg.textContent = "See you Monday, " + name + ".";
   }
   if (localStorage.getItem(storeKey + "::submitted")) showConfirmed();
   document.getElementById("editBtn").addEventListener("click", function () {
