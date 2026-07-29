@@ -229,9 +229,8 @@
       <ul class="know">
         <li>Doors open Sunday Aug 3 from 3pm. We're all having dinner together that first night.</li>
         <li>Pickups run from LAX and BUR. If your flight gets delayed or plans change, just text me. Nobody is getting stranded.</li>
-        <li>The address gets sent privately closer to the date, and it stays off socials completely. That's a promise we made to the house owner.</li>
         <li>Flying out: we recommend the morning of Aug 13. Evening of the 12th works too, just less ideal.</li>
-        <li>Any other questions: drop them in the Discord or text me. Seriously, ask anything.</li>
+        <li>Any other questions: drop them in the Discord or text me.</li>
       </ul>
       <a class="discord-btn" id="discordBtn" href="#" target="_blank" rel="noopener">Join the camp Discord →</a>
     </div>
@@ -243,7 +242,7 @@
       <p>You're here for 10 days, but the house has laundry, so pack lighter than you think.</p>
     </div>
     <div class="card">
-      <div class="pack-progress" id="packProgress">0 of 11 packed</div>
+      <div class="pack-progress" id="packProgress">0 of 8 packed</div>
       <ul class="pack" id="packList"></ul>
       <div class="covered"><strong>Already covered, leave at home:</strong> bedding, towels, groceries.</div>
     </div>
@@ -270,42 +269,52 @@
       </div>
 
       <div class="q">
-        <label class="q-label">Which arrival window are you landing in? <span class="req">*</span></label>
-        <div class="q-help">Landing Aug 3? Try to land between 12pm and 6pm at LAX or BUR.</div>
-        <div class="chips" data-chips="arrivalWindow">
-          <button type="button" class="chip">Before noon</button>
-          <button type="button" class="chip">12–3pm</button>
-          <button type="button" class="chip">3–6pm</button>
-          <button type="button" class="chip">After 6pm</button>
-          <button type="button" class="chip">Driving in</button>
-          <button type="button" class="chip">Haven't booked yet</button>
+        <label class="q-label" for="f-arrflight">Arrival flight #</label>
+        <div class="q-help">Landing Aug 3? Try to land between 12pm and 6pm.</div>
+        <input class="rndv-input" id="f-arrflight" name="arrivalFlight" type="text" placeholder="e.g. WS 1424, lands 4:00pm">
+      </div>
+
+      <div class="q">
+        <label class="q-label">Arrival airport</label>
+        <div class="chips" data-chips="arrivalAirport">
+          <button type="button" class="chip">LAX</button>
+          <button type="button" class="chip">BUR</button>
+          <button type="button" class="chip">Other</button>
         </div>
       </div>
 
       <div class="q">
-        <label class="q-label" for="f-flight">Airline + flight number + landing time</label>
-        <input class="rndv-input" id="f-flight" name="flightDetails" type="text" placeholder="e.g. WS 1424, lands 4:00pm at LAX">
+        <label class="q-label" for="f-depdate">Departure date</label>
+        <input class="rndv-input" id="f-depdate" name="departureDate" type="text" placeholder="e.g. Aug 13 morning">
       </div>
 
       <div class="q">
-        <label class="q-label" for="f-departure">Departure date and time</label>
-        <div class="q-help">Flight number too if it's booked.</div>
-        <input class="rndv-input" id="f-departure" name="departure" type="text" placeholder="e.g. Aug 13 morning, WS 1425 at 10am">
+        <label class="q-label" for="f-depflight">Departure flight #</label>
+        <input class="rndv-input" id="f-depflight" name="departureFlight" type="text" placeholder="e.g. WS 1425 at 10am">
       </div>
 
       <div class="q">
-        <label class="q-label" for="f-phone">Best phone number for day-of coordination <span class="req">*</span></label>
+        <label class="q-label">Departure airport</label>
+        <div class="chips" data-chips="departureAirport">
+          <button type="button" class="chip">LAX</button>
+          <button type="button" class="chip">BUR</button>
+          <button type="button" class="chip">Other</button>
+        </div>
+      </div>
+
+      <div class="q">
+        <label class="q-label" for="f-phone">Phone # <span class="req">*</span></label>
         <input class="rndv-input" id="f-phone" name="phone" type="tel" placeholder="So we can find you at the airport">
       </div>
 
       <div class="q">
-        <label class="q-label" for="f-gear">What gear are you bringing?</label>
-        <div class="q-help">Camera, laptop, mics, lights, anything. Your phone is enough, we just want to know what the house has to work with.</div>
+        <label class="q-label" for="f-gear">What content gear are you bringing?</label>
+        <div class="q-help">Your phone counts, we just want to know what the house has to work with.</div>
         <textarea class="rndv-input" id="f-gear" name="gear" rows="2" placeholder="The honest inventory"></textarea>
       </div>
 
       <div class="q">
-        <label class="q-label">What's your role in the friend group?</label>
+        <label class="q-label">Your role in the group</label>
         <div class="chips" data-chips="friendRole">
           <button type="button" class="chip">The planner</button>
           <button type="button" class="chip">The menace</button>
@@ -317,19 +326,18 @@
       </div>
 
       <div class="q">
-        <label class="q-label" for="f-weird">What are you weirdly good at that has nothing to do with content?</label>
-        <input class="rndv-input" id="f-weird" name="weirdlyGood" type="text" placeholder="Anything counts">
+        <label class="q-label" for="f-funfact">Fun fact</label>
+        <input class="rndv-input" id="f-funfact" name="funFact" type="text" placeholder="Anything counts">
       </div>
 
       <div class="q">
         <label class="q-label" for="f-words">Describe yourself in three words.</label>
-        <div class="q-help">Bonus points if one of them would surprise us.</div>
         <input class="rndv-input" id="f-words" name="threeWords" type="text" placeholder="___ , ___ , ___">
       </div>
 
       <div class="q">
-        <label class="q-label" for="f-song">Give me one song that has to be on the camp playlist.</label>
-        <input class="rndv-input" id="f-song" name="playlistSong" type="text" placeholder="Song + artist">
+        <label class="q-label" for="f-song">Link to a song for the camp playlist</label>
+        <input class="rndv-input" id="f-song" name="playlistSong" type="text" placeholder="Spotify / YouTube link">
       </div>
 
       <button class="send" id="sendBtn" type="submit">Send it in</button>
@@ -395,17 +403,14 @@
 
   /* ---------- packing list ---------- */
   var PACK = [
-    "Clothes for 5-6 days (laundry is on site, nobody is counting outfits)",
+    "Clothes (laundry available at the house)",
     "Swimsuit",
-    "One decent dinner outfit (you'll want it for at least one night)",
-    "Your gear: camera, laptop, mics, whatever you create with (your phone counts)",
-    "All your chargers and cables",
-    "Any meds, contacts, that kind of stuff",
-    "Toiletries",
-    "Comfortable shoes (we'll be on our feet a lot)",
-    "A layer for nights, LA cools off after dark",
-    "Sunscreen",
-    "ID. Passport if you're coming from Canada or Australia"
+    "Content gear (mics, cameras, laptops, tripods, small lights, headphones, etc)",
+    "Chargers & cables",
+    "Meds, contacts, etc",
+    "Toiletries & skincare",
+    "Comfortable shoes",
+    "ID (license or passport)"
   ];
   var packState = {};
   try { packState = JSON.parse(localStorage.getItem(storeKey + "::pack") || "{}"); } catch (e) {}
@@ -458,7 +463,7 @@
         Array.prototype.forEach.call(group.querySelectorAll(".chip"), function (c) { c.classList.remove("on", "hot"); });
         if (!already) {
           chip.classList.add("on");
-          if (key === "travelMode" || key === "arrivalWindow") chip.classList.add("hot");
+          if (key === "travelMode") chip.classList.add("hot");
           chipValues[key] = chip.textContent;
         } else {
           delete chipValues[key];
@@ -475,14 +480,16 @@
   function collect() {
     return {
       travelMode: chipValues.travelMode || "",
-      arrivalWindow: chipValues.arrivalWindow || "",
-      flightDetails: form.flightDetails.value.trim(),
-      departure: form.departure.value.trim(),
+      arrivalFlight: form.arrivalFlight.value.trim(),
+      arrivalAirport: chipValues.arrivalAirport || "",
+      departureDate: form.departureDate.value.trim(),
+      departureFlight: form.departureFlight.value.trim(),
+      departureAirport: chipValues.departureAirport || "",
       phone: form.phone.value.trim(),
       gear: form.gear.value.trim(),
       friendRole: chipValues.friendRole || "",
       friendRoleCustom: form.friendRoleCustom.value.trim(),
-      weirdlyGood: form.weirdlyGood.value.trim(),
+      funFact: form.funFact.value.trim(),
       threeWords: form.threeWords.value.trim(),
       playlistSong: form.playlistSong.value.trim()
     };
@@ -490,16 +497,16 @@
 
   /* restore draft */
   (function restore() {
-    ["flightDetails","departure","phone","gear","friendRoleCustom","weirdlyGood","threeWords","playlistSong"].forEach(function (k) {
+    ["arrivalFlight","departureDate","departureFlight","phone","gear","friendRoleCustom","funFact","threeWords","playlistSong"].forEach(function (k) {
       if (draft[k]) form[k].value = draft[k];
     });
-    ["travelMode","arrivalWindow","friendRole"].forEach(function (k) {
+    ["travelMode","arrivalAirport","departureAirport","friendRole"].forEach(function (k) {
       if (!draft[k]) return;
       var group = document.querySelector('[data-chips="' + k + '"]');
       Array.prototype.forEach.call(group.querySelectorAll(".chip"), function (chip) {
         if (chip.textContent === draft[k]) {
           chip.classList.add("on");
-          if (k === "travelMode" || k === "arrivalWindow") chip.classList.add("hot");
+          if (k === "travelMode") chip.classList.add("hot");
           chipValues[k] = chip.textContent;
         }
       });
@@ -540,7 +547,6 @@
 
     var missing = [];
     if (!data.travelMode) missing.push("flying or driving");
-    if (!data.arrivalWindow) missing.push("your arrival window");
     if (!data.phone) missing.push("your phone number");
     if (missing.length) {
       err.textContent = "Almost there, I just really need: " + missing.join(", ") + ".";
