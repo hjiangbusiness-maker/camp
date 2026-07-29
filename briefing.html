@@ -92,6 +92,17 @@
   .prose p { margin-bottom:18px; font-size:16.5px; color:var(--soft); }
   .prose p.lead { font-size:19px; color:var(--ink); font-weight:500; }
 
+  /* starred callout */
+  .callout {
+    border:1px dashed var(--accent); background:#fff7f4; padding:18px 20px 6px; margin:26px 0;
+  }
+  .callout .callout-tag {
+    font-family:'Space Mono',monospace; font-size:11px; font-weight:700;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:10px;
+  }
+  .callout p { font-size:16.5px; color:var(--soft); margin-bottom:14px; }
+  .callout p strong { color:var(--ink); }
+
   /* know card */
   .card {
     background:var(--card); border:1px solid var(--ink); padding:22px 22px 8px; margin:26px 0;
@@ -247,7 +258,10 @@
       <div class="covered"><strong>Already covered, leave at home:</strong> bedding, towels.</div>
     </div>
     <div class="prose">
-      <p>The most valuable things you can arrive at camp with are ideas that you're excited about or interested in making. Our workshops and guests are all here to help, but I personally think that the more conceptual firepower you come with, the more successful every work session will be.</p>
+      <div class="callout">
+        <span class="callout-tag">★ Don't forget</span>
+        <p><strong>The most valuable things you can arrive at camp with are ideas that you're excited about or interested in making.</strong> Our workshops and guests are all here to help, but I personally think that the more conceptual firepower you come with, the more successful every work session will be.</p>
+      </div>
     </div>
   </section>
 
