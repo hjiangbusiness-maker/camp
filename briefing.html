@@ -227,7 +227,7 @@
     <div class="card">
       <h3>Know before you land</h3>
       <ul class="know">
-        <li>Doors open Sunday Aug 3 from 3pm. We're all having dinner together that first night.</li>
+        <li>Doors open Monday Aug 3 from 3pm. We're all having dinner together that first night.</li>
         <li>Pickups run from LAX and BUR. If your flight gets delayed or plans change, just text me. Nobody is getting stranded.</li>
         <li>Flying out: we recommend the morning of Aug 13. Evening of the 12th works too, just less ideal.</li>
         <li>Any other questions: drop them in the Discord or text me.</li>
@@ -239,22 +239,22 @@
   <section id="packing">
     <div class="sec-head"><span class="sec-num">02</span><h2>The Packing List</h2></div>
     <div class="prose">
-      <p>You're here for 10 days, but the house has laundry, so pack lighter than you think.</p>
+      <p>You're here for 10 days, but the house has laundry, so pack lighter than you think. Here's a list to get you started.</p>
     </div>
     <div class="card">
       <div class="pack-progress" id="packProgress">0 of 8 packed</div>
       <ul class="pack" id="packList"></ul>
-      <div class="covered"><strong>Already covered, leave at home:</strong> bedding, towels, groceries.</div>
+      <div class="covered"><strong>Already covered, leave at home:</strong> bedding, towels.</div>
     </div>
     <div class="prose">
-      <p>Underwear is important, but the most valuable things you can arrive at camp with are ideas that you're excited about or interested in making. Our workshops and guests are all here to help, but I personally think that the more conceptual firepower you come with, the more successful every work session will be. All great videos begin with an idea. We'll have experts in pre-production, execution, and post at some point help augment wherever you are in your journey as a creator today.</p>
+      <p>The most valuable things you can arrive at camp with are ideas that you're excited about or interested in making. Our workshops and guests are all here to help, but I personally think that the more conceptual firepower you come with, the more successful every work session will be.</p>
     </div>
   </section>
 
   <section id="questionnaire">
     <div class="sec-head"><span class="sec-num">03</span><h2>The Questionnaire</h2></div>
     <div class="prose">
-      <p>Last form before camp, I promise. The travel section is the one I really need: I'm scheduling airport pickups off of these answers, so please get this in tonight if you can.</p>
+      <p>The travel section is the one I really need: I'm scheduling airport pickups off of these answers, so please get this in tonight if you can.</p>
     </div>
 
     <form id="qform" class="card" style="padding:26px 22px 24px;">
@@ -310,7 +310,7 @@
       <div class="q">
         <label class="q-label" for="f-gear">What content gear are you bringing?</label>
         <div class="q-help">Your phone counts, we just want to know what the house has to work with.</div>
-        <textarea class="rndv-input" id="f-gear" name="gear" rows="2" placeholder="The honest inventory"></textarea>
+        <textarea class="rndv-input" id="f-gear" name="gear" rows="2"></textarea>
       </div>
 
       <div class="q">
@@ -347,7 +347,7 @@
 
     <div id="confirmed">
       <div class="script">Locked in</div>
-      <p id="confirmedMsg">See you Sunday. Text Henry or email henry@rndv.world if anything changes.</p>
+      <p id="confirmedMsg">See you Monday.</p>
       <span class="edit" id="editBtn">← Edit your answers</span>
     </div>
   </section>
@@ -519,7 +519,7 @@
   function showConfirmed() {
     form.style.display = "none";
     confirmedEl.style.display = "block";
-    confirmedMsg.textContent = "See you Sunday, " + name + ". Text Henry or email henry@rndv.world if anything changes.";
+    confirmedMsg.textContent = "See you Monday, " + name + ".";
   }
   if (localStorage.getItem(storeKey + "::submitted")) showConfirmed();
   document.getElementById("editBtn").addEventListener("click", function () {
