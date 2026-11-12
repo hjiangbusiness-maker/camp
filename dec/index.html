@@ -76,7 +76,7 @@ svg text{font-family:'Inter Tight',sans-serif}
 .clip{position:absolute;top:6px;bottom:6px;border:0;border-radius:3px;background:#ECEAE5;color:#111;cursor:pointer;
   font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;padding:0 7px;overflow:hidden;white-space:nowrap;opacity:.42;transition:opacity .35s}
 .clip.on{opacity:1}
-.clip.nolabel{color:transparent}
+.clip.nolabel,#tl.bare .clip{color:transparent}
 .clip.ghost{background:none;border:1px dashed rgba(255,255,255,.45);color:#ECEAE5}
 .clip.ghost.taken{background:var(--red);border-color:var(--red);color:#fff;opacity:1}
 .clip.locked{background:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 6px,transparent 6px 12px);border:1px solid rgba(255,255,255,.14);color:#8d8a83}
@@ -278,14 +278,14 @@ const CONFIG = {
   // Clip labels that don't fit (phone width) hide themselves. Arrive / Session one / Dinner bodies are Claude's DRAFT.
   timeline: { start: 0, head: "Dec", days: [["1", "T"], ["2", "W"], ["3", "T"], ["4", "F"]] },
   tracks: [
-    { name: "Room",    clips: [{ from: 0.6, to: 0.8, label: "Session 1", beats: [1] }, { from: 1.05, to: 1.62, label: "Session 2", beats: [3] }, { from: 2.05, to: 2.62, label: "Session 3", beats: [4] }] },
-    { name: "Events",  clips: [{ from: 0.81, to: 0.98, label: "Dinner", beats: [2] }, { from: 1.05, to: 1.62, label: "Field trip", beats: [3] }, { from: 2.64, to: 2.99, label: "Fam dinner", beats: [5] }] },
-    { name: "Travel",  clips: [{ from: 0.3, to: 0.56, label: "Arrive", beats: [0] }, { from: 3.05, to: 3.75, label: "Fly home", beats: [6] }] }
+    { name: "Room",    clips: [{ from: 0.36, to: 0.66, label: "Session 1", short: "S1", beats: [1] }, { from: 1.05, to: 1.62, label: "Session 2", short: "S2", beats: [3] }, { from: 2.05, to: 2.62, label: "Session 3", short: "S3", beats: [4] }] },
+    { name: "Events",  clips: [{ from: 0.69, to: 0.97, label: "Dinner", short: "Food", beats: [2] }, { from: 1.05, to: 1.62, label: "Field trip", short: "Trip", beats: [3] }, { from: 2.64, to: 2.99, label: "Fam dinner", short: "Fam", beats: [5] }] },
+    { name: "Travel",  clips: [{ from: 0.05, to: 0.33, label: "Arrive", short: "Land", beats: [0] }, { from: 3.05, to: 3.75, label: "Fly home", short: "Home", beats: [6] }] }
   ],
   beats: [
-    { start: 0,    at: 0.4,  tc: "DEC 01 · 10:00", day: "Tue, Dec 1",   title: "Arrive.",        body: "Fly into LAX or BUR in the morning. We pick you up." },
-    { start: 0.58, at: 0.68, tc: "DEC 01 · 15:00", day: "Tue, Dec 1",   title: "Session one.",   body: "Introductions, light creative, and getting settled in." },
-    { start: 0.8,  at: 0.9,  tc: "DEC 01 · 19:30", day: "Tue, Dec 1",   title: "Dinner.",        body: "First night together." },
+    { start: 0,    at: 0.2,  tc: "DEC 01 · 10:00", day: "Tue, Dec 1",   title: "Arrive.",        body: "Fly into LAX or BUR in the morning. We pick you up." },
+    { start: 0.35, at: 0.5,  tc: "DEC 01 · 15:00", day: "Tue, Dec 1",   title: "Session one.",   body: "Introductions, light creative, and getting settled in." },
+    { start: 0.68, at: 0.83, tc: "DEC 01 · 19:30", day: "Tue, Dec 1",   title: "Dinner.",        body: "First night together." },
     { start: 1,    at: 1.5,  tc: "DEC 02 · 11:00", day: "Wed, Dec 2",   title: "Session two.",   body: "The first real day of ideation. Ends with light pitches." },
     { start: 2,    at: 2.3,  tc: "DEC 03 · 11:00", day: "Thu, Dec 3",   title: "Session three.", body: "Final ideation push. Ends with pitches." },
     { start: 2.66, at: 2.82, tc: "DEC 03 · 19:30", day: "Thu, Dec 3",   title: "Fam dinner.",    body: "7:30 pm. Everyone." },
@@ -524,16 +524,17 @@ const xPct = d => (d - T0) * COLW;
   let h = '<div class="row ruler"><div class="h mono">' + esc(TL.head) + '</div><div class="lane">' + TL.days.map(d => '<span class="mono"><b>' + esc(d[0]) + '</b>' + esc(d[1]) + '</span>').join("") + '</div></div>';
   CONFIG.tracks.forEach(tr => {
     h += '<div class="row"><div class="h mono">' + esc(tr.name) + '</div><div class="lane">' + tr.clips.map(c =>
-      '<button type="button" class="clip' + (c.ghost ? " ghost" : "") + (c.locked ? " locked" : "") + '" data-beats="' + c.beats.join(",") + '" style="left:' + xPct(c.from) + '%;width:' + (c.to - c.from) * COLW + '%" aria-label="' + esc(tr.name + " " + c.label) + '">' + esc(c.label) + '</button>').join("") + '</div></div>';
+      '<button type="button" class="clip' + (c.ghost ? " ghost" : "") + (c.locked ? " locked" : "") + '" data-beats="' + c.beats.join(",") + '" data-full="' + esc(c.label) + '" data-short="' + esc(c.short || c.label) + '" style="left:' + xPct(c.from) + '%;width:' + (c.to - c.from) * COLW + '%" aria-label="' + esc(tr.name + " " + c.label) + '">' + esc(c.label) + '</button>').join("") + '</div></div>';
   });
   h += '<div class="heads"><div class="ph" id="ph"></div></div>';
   $("tl").innerHTML = h;
 })();
 const sched = $("sched"), clips = Array.from(document.querySelectorAll(".clip"));
-const D0 = T0 + 0.25, D1 = T0 + TL.days.length - 0.2;   // the playhead sweeps the guest days evenly
+const D0 = T0 + 0.05, D1 = T0 + TL.days.length - 0.2;   // the playhead sweeps the guest days evenly
 const dayAt = p => D0 + p * (D1 - D0);
 const pAt = d => Math.min(1, Math.max(0, (d - D0) / (D1 - D0)));
-function fitLabels() { clips.forEach(c => { c.classList.remove("nolabel"); if (c.scrollWidth > c.clientWidth + 1) c.classList.add("nolabel"); }); }
+// Labels: full name if it fits, else the short name; if any box cannot fit even its short name, all labels hide (never a mix of named and empty boxes).
+function fitLabels() { const over = c => c.scrollWidth > c.clientWidth + 1; let bad = false; $("tl").classList.remove("bare"); const fam = c => c.dataset.full.replace(/\s*\d+$/, ""), shortFam = new Set(); clips.forEach(c => { c.classList.remove("nolabel"); c.textContent = c.dataset.full; if (over(c)) shortFam.add(fam(c)); }); clips.forEach(c => { if (shortFam.has(fam(c))) c.textContent = c.dataset.short; if (over(c)) bad = true; }); $("tl").classList.toggle("bare", bad); }   // numbered siblings (Session 1/2/3) go short together
 fitLabels(); addEventListener("resize", fitLabels); if (document.fonts) document.fonts.ready.then(fitLabels);
 let beatNow = -1;
 function setBeat(i) {
