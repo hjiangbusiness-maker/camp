@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RNDV Creator Sessions · You're invited</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="A personal invitation. Los Angeles, Dec 1 to 4, 2026.">
+<meta property="og:title" content="RNDV Creator Sessions · You're invited">
+<meta property="og:description" content="A personal invitation. Los Angeles, Dec 1 to 4, 2026.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://camp.rndv.world/dec/">
+<meta property="og:image" content="https://camp.rndv.world/dec/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!--
+  PRODUCTION invite for RNDV Creator Sessions (Dec 2026). Source of truth: camp/dec-2026/invite.html in the vault.
+  Deployed as dec/index.html in the PUBLIC repo github.com/hjiangbusiness-maker/camp -> https://camp.rndv.world/dec/
+  Personal link: https://camp.rndv.world/dec/?name=<first name>&no=<number>. No guest names live in the repo.
+  RSVPs POST to Formspree (same form as August, f/xwvdzlgv), which emails hjiang.business@gmail.com; mailto fallback on failure.
+  Design iterations live in camp/dec-2026/mockups/ (invite.html there is the mockup twin; keep copy changes in sync).
+-->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ECEAE5;--ink:#111;--mut:#77746c;--line:rgba(17,17,17,.16);--red:#E0483A;--d:300px;--pad:clamp(24px,6vw,88px)}
+*{box-sizing:border-box}
+html.lock,html.lock body{overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased}
+.mono{font:500 11px/1.3 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+section{padding:0 var(--pad)}
+.screen{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:88px;padding-bottom:88px}
+.wrap{width:100%;max-width:1040px;margin:0 auto}
+.big{font-weight:300;font-size:clamp(34px,6.4vw,76px);line-height:1.02;letter-spacing:-.035em;margin:18px 0 0;text-wrap:balance}
+.body{font-size:clamp(16px,1.6vw,19px);line-height:1.55;color:#55524c;max-width:34em;margin:26px 0 0}
+.rv{opacity:0;transform:translateY(14px);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.dark{background:#0E0E0E;color:#ECEAE5}
+.dark .mono{color:#8d8a83}.dark .body{color:#a9a69f}
+
+/* opening + hero */
+canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:50;background:var(--bg);cursor:pointer}
+.hint{position:fixed;left:0;right:0;bottom:64px;z-index:60;text-align:center;pointer-events:none;transition:opacity .4s}
+.hint.off{opacity:0}
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(22px,4.5vh,44px);padding-top:24px;padding-bottom:72px;text-align:center}
+.rec{width:var(--d);height:var(--d);border-radius:50%;position:relative;flex:none;opacity:0;
+  background:repeating-radial-gradient(circle,#0e0e0e 0 1.3px,#1c1c1c 1.3px 2.6px);box-shadow:0 22px 44px rgba(0,0,0,.22)}
+.rec.on{opacity:1}
+.rec::before,.cut::before{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;z-index:1;
+  background:conic-gradient(from 25deg,transparent 0 7%,rgba(255,255,255,.13) 12%,transparent 18% 50%,rgba(255,255,255,.09) 61%,transparent 67%)}
+.label{position:absolute;left:30%;top:30%;width:40%;height:40%;border-radius:50%;overflow:hidden}
+.label svg{display:block;width:100%;height:100%}
+svg text{font-family:'Inter Tight',sans-serif}
+.copy{max-width:600px;opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.copy.on{opacity:1;transform:none}
+.copy h1{text-wrap:balance;font-weight:400;font-size:clamp(30px,6.2vw,54px);line-height:1.02;letter-spacing:-.03em;margin:14px 0 12px}
+.copy p{font-size:16px;line-height:1.5;color:#5c5a55;margin:0}
+.cue{margin-top:30px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.cue i{width:1px;height:34px;background:var(--ink);animation:cue 2s ease-in-out infinite;transform-origin:top}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* schedule: an editing timeline you scrub by scrolling */
+.sched{height:340vh;padding:0}
+.pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;padding:56px var(--pad)}
+.bar{display:flex;justify-content:space-between;align-items:center}
+.tc{display:flex;align-items:center;gap:8px;color:#ECEAE5}
+.tc::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red)}
+.tl{--hw:clamp(58px,9vw,112px);position:relative;margin-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.row{display:flex;height:clamp(32px,5.2vh,46px);border-bottom:1px solid rgba(255,255,255,.09)}
+.row .h{flex:none;width:var(--hw);display:flex;align-items:center;font-size:10px}
+.lane{position:relative;flex:1;background:repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px calc(100% / var(--cols,10)))}
+.ruler .lane{display:grid;grid-template-columns:repeat(var(--cols,10),1fr);background:none}
+.ruler span{display:flex;align-items:center;gap:6px;padding-left:5px;border-left:1px solid rgba(255,255,255,.12);font-size:10px;letter-spacing:.08em}
+.ruler span b{font-weight:500;color:#ECEAE5}
+@media (max-width:560px){.ruler span{font-size:0;gap:0;padding-left:4px}.ruler span b{font-size:10px}}
+.clip{position:absolute;top:6px;bottom:6px;border:0;border-radius:3px;background:#ECEAE5;color:#111;cursor:pointer;
+  font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;padding:0 7px;overflow:hidden;white-space:nowrap;opacity:.42;transition:opacity .35s}
+.clip.on{opacity:1}
+.clip.nolabel{color:transparent}
+.clip.ghost{background:none;border:1px dashed rgba(255,255,255,.45);color:#ECEAE5}
+.clip.ghost.taken{background:var(--red);border-color:var(--red);color:#fff;opacity:1}
+.clip.locked{background:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 6px,transparent 6px 12px);border:1px solid rgba(255,255,255,.14);color:#8d8a83}
+.heads{position:absolute;left:var(--hw);right:0;top:0;bottom:0;pointer-events:none}
+.ph{position:absolute;top:0;bottom:0;left:0;width:1px;background:var(--red)}
+.ph::before{content:"";position:absolute;top:0;left:-5px;border-left:5.5px solid transparent;border-right:5.5px solid transparent;border-top:8px solid var(--red)}
+.beat{margin-top:clamp(20px,4vh,40px);min-height:168px;transition:opacity .25s}
+.beat.sw{opacity:0}
+.beat h3{font-weight:300;font-size:clamp(30px,5vw,58px);line-height:1.04;letter-spacing:-.03em;margin:10px 0 10px}
+.beat p{font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#a9a69f;margin:0;max-width:32em}
+
+/* footage slot */
+/* live wall: four LA feeds in one 16:9 rectangle */
+.wallhead{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.wall{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:100%;max-width:calc(min(64svh,620px) * 16 / 9);margin:28px auto 0;background:#0b0b0b;padding:3px}
+.feed{position:relative;aspect-ratio:16/9;background:#141414;overflow:hidden}
+.feed video,.feed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;pointer-events:none;opacity:0;transition:opacity .8s}
+.feed.on video,.feed.on iframe{opacity:1}
+.feed iframe.yt{transform:scale(1.3)}   /* crops YouTube's title bar, logo and corner widgets */
+.feed .tag{position:absolute;left:8px;bottom:7px;z-index:2;display:flex;align-items:center;gap:6px;padding:4px 7px 3px;background:rgba(0,0,0,.55);border-radius:2px;color:#ECEAE5;font-size:9px;letter-spacing:.14em}
+.feed .tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);animation:live 2s ease-in-out infinite}
+.feed.off .tag::before{background:#77746c;animation:none}
+.feed.off::after{content:"Offline right now";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:500 10px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#77746c}
+@keyframes live{50%{opacity:.35}}
+@media (max-width:560px){.feed .tag{left:5px;bottom:5px;padding:3px 5px 2px;font-size:7px;letter-spacing:.1em;gap:4px}.feed .tag::before{width:5px;height:5px}}
+.wall{position:relative}
+.wall.blocked::after{content:"Live feeds play on the hosted invite. This preview blocks outside video.";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;
+  font:500 11px/1.5 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#ECEAE5;background:rgba(11,11,11,.88);z-index:3}
+.credit{margin-top:12px;text-align:center;text-transform:none;letter-spacing:.04em}
+
+/* logistics */
+.lg{margin-top:34px;border-top:1px solid var(--line)}
+.lg>div{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
+.lg b{display:block;font-weight:400;font-size:clamp(20px,2.6vw,30px);letter-spacing:-.02em}
+.lg small{display:block;font-size:14px;line-height:1.4;color:var(--mut);margin-top:4px}
+.lg i{font-style:normal;color:var(--ink);white-space:nowrap}
+.lg i.you{border:1px solid var(--ink);padding:6px 9px;border-radius:99px}
+
+/* house rules: the only colored text on the page, so the rules stand out. Dark royal blue (Henry, Nov 11; forest green tried first). */
+:root{--rules:#1B2F8F}
+#rules .rule p{color:var(--rules)}
+#rules .mono{color:var(--rules);opacity:.7}
+.rule{min-height:46svh;display:flex;align-items:center}
+.rule p{font-weight:300;font-size:clamp(30px,5.6vw,68px);line-height:1.04;letter-spacing:-.035em;margin:12px 0 0;text-wrap:balance}
+
+/* ideas */
+.two{display:grid;grid-template-columns:minmax(0,1fr);gap:44px;align-items:center}
+@media (min-width:900px){.two{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:72px}}
+.cut{position:relative;width:min(100%,360px);aspect-ratio:1;margin:0 auto;border-radius:50%;box-shadow:0 22px 50px rgba(0,0,0,.5)}
+.cut svg{display:block;width:100%;height:100%}
+.cut .band{transition:stroke-dashoffset 1.1s cubic-bezier(.3,.6,.2,1)}
+.tracks{margin:26px auto 0;max-width:360px;border-top:1px solid rgba(255,255,255,.16)}
+.tracks div{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:15px;line-height:1.35}
+.tracks div span:first-child{flex:none;width:22px;color:#8d8a83;font:500 11px/1.7 'JetBrains Mono',monospace}
+.tracks div.empty span:last-child{color:#5d5b56}
+.light .tracks{border-color:var(--line)}.light .tracks div{border-color:var(--line)}.light .tracks div.empty span:last-child{color:#a09d96}
+
+/* fields */
+.f{display:block;margin-top:26px}
+.f>span{display:block;margin-bottom:8px}
+.f>span.q{font-size:clamp(17px,1.7vw,20px);line-height:1.35;color:inherit;margin:-2px 0 2px;text-wrap:balance}
+.f input,.f textarea{width:100%;border:0;border-bottom:1px solid currentColor;background:none;color:inherit;font:300 19px/1.4 'Inter Tight',sans-serif;padding:8px 0;border-radius:0;outline:0;resize:none}
+.f input::placeholder,.f textarea::placeholder{color:#9b9892}
+.dark .f input{border-color:rgba(255,255,255,.35)}.dark .f input:focus{border-color:#fff}
+.dark .f input::placeholder{color:#5d5b56}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr);gap:0 40px}
+@media (min-width:760px){.grid2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{all:unset;cursor:pointer;box-sizing:border-box;border:1px solid var(--ink);border-radius:99px;padding:11px 16px;font-size:15px;line-height:1;transition:background .2s,color .2s}
+.pill[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.ans{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:10px;margin-top:34px}
+.confirm{margin:40px 0 0;font-size:15px;line-height:1.5;color:var(--mut);max-width:34em}
+.confirm:not([hidden]) + .go{margin-top:16px}
+.ans .pill{text-align:center;padding:18px 8px;font-size:clamp(15px,2vw,19px)}
+.go{all:unset;cursor:pointer;box-sizing:border-box;margin-top:40px;background:var(--ink);color:var(--bg);padding:20px 30px;border-radius:99px;font-size:17px;display:inline-flex;align-items:center;gap:10px}
+.go::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--red)}
+.err{color:#b3261e;font-size:14px;margin-top:14px;min-height:20px}
+.link{all:unset;cursor:pointer;border-bottom:1px solid currentColor;padding-bottom:3px}
+[hidden]{display:none!important}
+footer{padding:44px var(--pad) 96px;display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.cue i{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="hint mono" id="hint">Tap to skip</div>
+
+<section class="hero">
+  <div class="rec" id="rec" role="img" aria-label="A record with your name on the label">
+    <div class="label" id="label"></div>
+  </div>
+  <div class="copy" id="copy">
+    <div class="mono" id="eyebrow"></div>
+    <h1 id="headline"></h1>
+    <p id="sub"></p>
+    <div class="cue"><span class="mono">Scroll</span><i></i></div>
+  </div>
+</section>
+
+<section class="screen"><div class="wrap">
+  <div class="mono rv">01 · <span id="whatLabel"></span></div>
+  <p class="big rv" id="whatBig"></p>
+  <p class="body rv" id="whatBody"></p>
+</div></section>
+
+<section class="sched dark" id="sched">
+  <div class="pin"><div class="wrap">
+    <div class="bar"><span class="mono">02 · Schedule</span><span class="mono tc" id="tc"></span></div>
+    <div class="tl" id="tl"></div>
+    <div class="beat" id="beat"><div class="mono" id="beatDay"></div><h3 id="beatTitle"></h3><p id="beatBody"></p></div>
+  </div></div>
+</section>
+
+<section class="screen"><div class="wrap">
+  <div class="wallhead rv"><div class="mono">03 · <span id="filmLabel"></span></div><div class="mono" id="laClock"></div></div>
+  <div class="wall rv" id="wall"></div>
+  <p class="mono credit rv" id="filmCredit"></p>
+</div></section>
+
+<section class="screen"><div class="wrap">
+  <div class="mono rv">04 · Logistics</div>
+  <p class="big rv" id="lgBig"></p>
+  <div class="lg" id="lg"></div>
+</div></section>
+
+<section id="rules"><div class="wrap"></div></section>
+
+<section class="screen dark"><div class="wrap two">
+  <div>
+    <div class="mono rv" id="ideasLabel">06 · Your ideas</div>
+    <p class="big rv" id="ideasBig"></p>
+    <p class="body rv" id="ideasBody"></p>
+    <div class="rv" id="ideaFields"></div>
+  </div>
+  <div class="rv">
+    <div class="cut" id="cutA"></div>
+    <div class="tracks" id="tracksA"></div>
+  </div>
+</div></section>
+
+<section class="screen" id="rsvp"><div class="wrap">
+  <form id="form" novalidate>
+    <div class="mono rv">07 · RSVP</div>
+    <p class="big rv" id="rsvpBig"></p>
+    <div class="ans rv" id="ans"></div>
+    <div id="more" hidden>
+      <div class="f"><span class="mono">Which days</span><div class="pills" id="days"></div></div>
+      <div class="grid2">
+        <label class="f"><span class="mono">Flying from</span><input name="from" placeholder="Toronto" autocomplete="off"></label>
+        <label class="f"><span class="mono">Arriving / leaving</span><input name="travel" placeholder="Dec 1 morning / Dec 4 morning" autocomplete="off"></label>
+        <label class="f"><span class="mono">Dietary / food allergies</span><input name="dietary" placeholder="None" autocomplete="off"></label>
+        <label class="f"><span class="mono">Emergency contact</span><input name="emergency" placeholder="Name and number" autocomplete="off"></label>
+      </div>
+    </div>
+    <div class="grid2">
+      <label class="f"><span class="mono">Best contact</span><input name="contact" placeholder="Phone or handle" autocomplete="off"></label>
+      <label class="f"><span class="mono">Anything you need from us</span><input name="needs" placeholder="Optional" autocomplete="off"></label>
+    </div>
+    <div class="err" id="err" role="alert"></div>
+    <p class="confirm" id="confirm"></p>
+    <button class="go" type="submit" id="go"></button>
+  </form>
+  <div id="done" class="two light" hidden>
+    <div>
+      <div class="mono" id="doneKicker"></div>
+      <p class="big" id="doneBig"></p>
+      <p class="body" id="doneBody"></p>
+      <p class="body" style="display:flex;flex-wrap:wrap;gap:12px 26px"><a class="link" id="cal" target="_blank" rel="noopener">Add to Google Calendar</a><button class="link" type="button" id="edit">Edit response</button></p>
+    </div>
+    <div>
+      <div class="cut" id="cutB"></div>
+      <div class="tracks" id="tracksB"></div>
+    </div>
+  </div>
+</div></section>
+
+<footer><span class="mono" id="foot"></span><button class="link mono" type="button" id="replay">Replay the opening</button></footer>
+
+<script>
+"use strict";
+const CONFIG = {
+  camp: "RNDV Creator Sessions",
+  people: 15,                                   // PLACEHOLDER headcount (also the 15 dots)
+  email: "henry@rndv.world",
+  hero: {
+    ring: "RNDV · WRITERS' ROOM · LOS ANGELES · DECEMBER MMXXVI · NOT FOR RELEASE ·",
+    eyebrow: "RNDV · Writers' room · Los Angeles",
+    headline: "Come make your next greatest hit.",
+    sub: "{name}, welcome to RNDV Creator Sessions."
+  },
+  what: {
+    label: "The room",
+    big: "Fifteen creators. One space. 3 days.",
+    body: "A small, hand-picked writers' room in Los Angeles. We come together to write and produce the next big series and video ideas alongside each other."
+  },
+  // PLACEHOLDER dates and times. `from` and `to` are days since Dec 1 (0 = start of Dec 1, -1 = start of Nov 30).
+  // The ruler starts at `timeline.start` and shows one column per entry in `timeline.days`.
+  // Guests see Dec 1 to Dec 4: fly in the morning of Dec 1, Session 1 that afternoon, sessions through Dec 3, fly home Dec 4 (picked for cost, Nov 11).
+  // Clip labels that don't fit (phone width) hide themselves. Arrive / Session one / Dinner bodies are Claude's DRAFT.
+  timeline: { start: 0, head: "Dec", days: [["1", "T"], ["2", "W"], ["3", "T"], ["4", "F"]] },
+  tracks: [
+    { name: "Room",    clips: [{ from: 0.6, to: 0.8, label: "Session 1", beats: [1] }, { from: 1.05, to: 1.62, label: "Session 2", beats: [3] }, { from: 2.05, to: 2.62, label: "Session 3", beats: [4] }] },
+    { name: "Events",  clips: [{ from: 0.81, to: 0.98, label: "Dinner", beats: [2] }, { from: 1.14, to: 1.84, label: "Field trip", beats: [3] }, { from: 2.64, to: 2.99, label: "Fam dinner", beats: [5] }] },
+    { name: "Travel",  clips: [{ from: 0.3, to: 0.56, label: "Arrive", beats: [0] }, { from: 3.05, to: 3.75, label: "Fly home", beats: [6] }] }
+  ],
+  beats: [
+    { start: 0,    at: 0.4,  tc: "DEC 01 · 10:00", day: "Tue, Dec 1",   title: "Arrive.",        body: "Fly into LAX or BUR in the morning. We pick you up." },
+    { start: 0.58, at: 0.68, tc: "DEC 01 · 15:00", day: "Tue, Dec 1",   title: "Session one.",   body: "Introductions, light creative, and getting settled in." },
+    { start: 0.8,  at: 0.9,  tc: "DEC 01 · 20:00", day: "Tue, Dec 1",   title: "Dinner.",        body: "First night together." },
+    { start: 1,    at: 1.5,  tc: "DEC 02 · 11:00", day: "Wed, Dec 2",   title: "Session two.",   body: "The first real day of ideation. Ends in light pitches." },
+    { start: 2,    at: 2.3,  tc: "DEC 03 · 11:00", day: "Thu, Dec 3",   title: "Session three.", body: "The big pitch day." },
+    { start: 2.66, at: 2.82, tc: "DEC 03 · 20:00", day: "Thu, Dec 3",   title: "Fam dinner.",    body: "8 pm. Everyone." },
+    { start: 3,    at: 3.35, tc: "DEC 04 · 10:00", day: "Fri, Dec 4",   title: "Head home.",     body: "Fly out whenever suits you. Your part is done." }
+  ],
+  // Live LA feeds (Henry's pick, Nov 11). Hollywood Sign: the Hollywood Sign Trust's own stream (hotlinked; ask them / credit them before sending).
+  // The rest are YouTube live streams (video ids; if a channel restarts its stream the id changes and that cell shows "Offline right now").
+  // Feeds load only while this section is on screen.
+  film: {
+    label: "Los Angeles, live",
+    credit: "Live from the Hollywood Sign Trust, explore.org, Venice Vive and FaireFilm",
+    feeds: [
+      { name: "Hollywood Sign",          hls: "https://wowza.hollywoodsign.org/hollywoodsignupper/upper.stream/playlist.m3u8" },
+      { name: "Santa Monica Beach",      youtube: "v97JpT3ZA0w" },   // explore.org, beach + pier + wheel
+      { name: "Venice Beach",            youtube: "0IgjqQzibqE" },   // Venice Vive, boardwalk + ocean
+      { name: "Downtown LA",             youtube: "U2OQzzGj4kU", zoom: 1.7, origin: "30% 92%" }    // FaireFilm, 57th floor skyline; zoomed past its clock + labels
+    ]
+  },
+  logistics: {
+    big: "We've got you once you land.",
+    rows: [
+      ["The house", "Address sent privately, closer to the date.", "Covered"],
+      ["Dinner", "", "Covered"],
+      ["Rides around LA", "Including airport pickup.", "Covered"],
+      ["Getting to LA", "Flights and travel to LA aren't covered, so book whatever works best for you. Fly into LAX or BUR and we'll take it from there.", ""]
+    ]
+  },
+  rules: ["No idea is a bad idea.", "Build and treat everyone with the same respect.", "Work hard, play hard.", "Break the internet."],
+  // The three questions are Henry's (Nov 11). Label, big, body and credit are Claude's DRAFT. Each answer cuts a track on the record.
+  ideas: {
+    label: "Your favorites",
+    big: "A little about you.",
+    body: "Three quick ones before you get here.",
+    questions: [
+      { q: "What's the favorite piece of content you've made?", ph: "Drop the link", link: true },
+      { q: "What are some of your favorite YouTube channels?", ph: "A few names" },
+      { q: "Is there something you wish you could make but can't or haven't?", ph: "Anything goes" }
+    ],
+    credit: "Notes from {first}"
+  },
+  rsvp: {
+    big: "See you soon?",
+    answers: [["yes", "I'll be there"], ["no", "Can't make it"]],
+    days: [["d1", "Tue Dec 1", 1], ["d2", "Wed Dec 2", 2], ["d3", "Thu Dec 3", 3], ["table", "Fam dinner", 3]],
+    confirm: "I confirm that I have read everything and can attend on the dates specified above.",
+    go: "Submit RSVP", goNo: "Submit RSVP"
+  },
+  done: {
+    kicker: "Confirmed", big: "You're on the record, {name}.",
+    body: "We'll send the address and the rest privately as the date gets close. Text Henry or email {email}.",
+    noKicker: "Noted", noBig: "Next one, {name}.", noBody: "Thanks for telling us. If anything changes, text Henry or email {email}."
+  },
+  open: {
+    particles: { desktop: 1500, mobile: 900 }, ball: [1.6, 3.2],
+    spin: 3.5, fastSpin: 8, blurFrom: 2, wobble: 0.06,
+    t: { appearSpread: 1.0, gatherStart: 1.1, gatherStagger: 1.0, gatherDur: 1.25, thinAt: 3.6, fastAt: 5.4, fastDur: 1.9, fade: 0.8, spinDown: 2.8, copyAt: 1.3 }
+  }
+};
+
+/* ---------- who ---------- */
+const params = new URLSearchParams(location.search);   // ?name=<first name>&no=<number>; no name falls back to "friend"
+const RSVP_ENDPOINT = "https://formspree.io/f/xwvdzlgv";
+const rawName = ((params.get("name") || "friend").trim().slice(0, 40)) || "friend";
+const NAME = rawName.split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+const FIRST = NAME.split(" ")[0];
+const SLUG = rawName.toLowerCase().replace(/[^a-z0-9]+/g, "-") || "friend";
+const NO = Math.max(1, parseInt(params.get("no"), 10) || 1);
+const NO2 = String(NO).padStart(2, "0");
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fill = s => s.replace("{name}", FIRST).replace("{email}", CONFIG.email);
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }, del(k) { try { localStorage.removeItem(k); } catch (e) {} } };
+const K_SEEN = "inv-seen-" + SLUG, K_RSVP = "inv-rsvp-" + SLUG;
+const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- static copy ---------- */
+function labelSVG(name, small) {
+  const fs = name.length > 11 ? 15 : name.length > 8 ? 19 : 25;
+  return '<svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="ring' + small + '" d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"/></defs>' +
+    '<circle cx="100" cy="100" r="100" fill="#F4F2EC"/><circle cx="100" cy="100" r="94" fill="none" stroke="#111" stroke-width=".5" opacity=".3"/>' +
+    '<text font-size="6.2" font-weight="500" letter-spacing="2" fill="#111"><textPath href="#ring' + small + '" textLength="520">' + esc(CONFIG.hero.ring) + '</textPath></text>' +
+    '<text x="100" y="76" text-anchor="middle" font-size="' + fs + '" font-weight="300" letter-spacing="-.7" fill="#111">' + esc(name) + '</text>' +
+    '<text x="100" y="137" text-anchor="middle" font-size="7" font-weight="500" letter-spacing="2.6" fill="#111">N° ' + NO2 + '</text>' +
+    '<circle cx="100" cy="100" r="6.5" fill="#ECEAE5"/></svg>';
+}
+$("label").innerHTML = labelSVG(FIRST, "h");
+$("eyebrow").textContent = CONFIG.hero.eyebrow;
+$("headline").textContent = CONFIG.hero.headline;
+$("sub").textContent = fill(CONFIG.hero.sub);
+$("whatLabel").textContent = CONFIG.what.label;
+$("whatBig").textContent = CONFIG.what.big;
+$("whatBody").textContent = CONFIG.what.body;
+$("filmLabel").textContent = CONFIG.film.label;
+$("filmCredit").textContent = CONFIG.film.credit;
+
+/* ---------- live wall ---------- */
+(function liveWall() {
+  const wall = $("wall"), feeds = CONFIG.film.feeds;
+  wall.innerHTML = feeds.map((f, i) => '<div class="feed" data-i="' + i + '"><span class="mono tag">' + esc(f.name) + '</span></div>').join("");
+  const cells = Array.from(wall.children);
+  const clock = () => { $("laClock").textContent = "LA · " + new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit" }).format(new Date()); };
+  clock(); setInterval(clock, 20000);
+  let hlsLib = null;
+  const loadHls = () => hlsLib || (hlsLib = new Promise((res, rej) => { const s = document.createElement("script"); s.src = "https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"; s.onload = () => res(window.Hls); s.onerror = rej; document.head.appendChild(s); }));
+  let ytLib = null;
+  const loadYT = () => ytLib || (ytLib = new Promise((res, rej) => {
+    if (window.YT && window.YT.Player) return res(window.YT);
+    const prev = window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady = () => { prev && prev(); res(window.YT); };
+    const s = document.createElement("script"); s.src = "https://www.youtube.com/iframe_api"; s.onerror = rej; document.head.appendChild(s);
+  }));
+  const live = [];   // per cell: { stop() }
+  function start(cell) {
+    const i = +cell.dataset.i, f = feeds[i];
+    if (live[i]) return;
+    cell.classList.remove("off");
+    const fail = () => { cell.classList.add("off"); cell.classList.remove("on"); };
+    if (f.youtube) {
+      // YouTube's player API tells us when the stream is really playing. The cell shows the feed only then;
+      // while it loads, buffers or pauses (when YouTube draws its own title bar, logo and "More videos"), the cell stays dark.
+      const slot = document.createElement("div"); cell.appendChild(slot);
+      let player = null, retry = null, gone = false;
+      live[i] = { stop() { gone = true; clearTimeout(retry); try { player && player.destroy(); } catch (e) {} cell.querySelectorAll("iframe,div:not(.tag)").forEach(n => n.remove()); cell.classList.remove("on"); } };
+      loadYT().then(YT => {
+        if (gone) return;
+        player = new YT.Player(slot, {
+          videoId: f.youtube, host: "https://www.youtube.com",
+          playerVars: { autoplay: 1, mute: 1, controls: 0, playsinline: 1, rel: 0, modestbranding: 1, disablekb: 1, iv_load_policy: 3, fs: 0, origin: location.origin },
+          events: {
+            onReady: e => { const fr = e.target.getIframe(); fr.classList.add("yt"); fr.title = f.name; if (f.zoom) { fr.style.transform = "scale(" + f.zoom + ")"; fr.style.transformOrigin = f.origin || "50% 50%"; } e.target.mute(); e.target.playVideo(); },
+            onStateChange: e => {
+              clearTimeout(retry);
+              if (e.data === YT.PlayerState.PLAYING) { retry = setTimeout(() => !gone && cell.classList.add("on"), 1200); return; }   // after YouTube's title fades
+              cell.classList.remove("on");
+              if (e.data !== YT.PlayerState.BUFFERING) retry = setTimeout(() => { try { !gone && player.playVideo(); } catch (x) {} }, 1500);
+            },
+            onError: fail
+          }
+        });
+      }).catch(fail);
+      return;
+    }
+    if (f.ozolio) {
+      const fr = document.createElement("iframe");
+      fr.title = f.name; fr.allow = "autoplay"; fr.src = "https://relay.ozolio.com/pub.api?cmd=embed&oid=" + f.ozolio;
+      fr.onload = () => setTimeout(() => cell.classList.add("on"), 600);
+      cell.appendChild(fr);
+      live[i] = { stop() { fr.remove(); cell.classList.remove("on"); } };
+      return;
+    }
+    const v = document.createElement("video");
+    v.muted = true; v.autoplay = true; v.playsInline = true; v.setAttribute("muted", ""); v.setAttribute("playsinline", "");
+    v.addEventListener("playing", () => cell.classList.add("on"));
+    v.addEventListener("error", fail);
+    cell.appendChild(v);
+    let hls = null;
+    const state = { stop() { if (hls) hls.destroy(); v.removeAttribute("src"); v.load(); v.remove(); cell.classList.remove("on"); } };
+    live[i] = state;
+    if (v.canPlayType("application/vnd.apple.mpegurl")) { v.src = f.hls; v.play().catch(() => {}); }
+    else loadHls().then(Hls => {
+      if (live[i] !== state || !Hls.isSupported()) return Hls.isSupported() ? null : fail();
+      hls = new Hls({ maxBufferLength: 6 });
+      hls.on(Hls.Events.ERROR, (e, d) => { if (d.fatal) fail(); });
+      hls.loadSource(f.hls); hls.attachMedia(v); v.play().catch(() => {});
+    }).catch(fail);
+  }
+  function stop(cell) { const i = +cell.dataset.i; if (live[i]) { live[i].stop(); live[i] = null; } }
+  // A sandboxed host (the claude.ai artifact preview) blocks outside video. Probe once; if blocked, say so instead of showing black.
+  const first = feeds.find(f => f.hls);
+  let ok = null;
+  const probe = () => ok || (ok = fetch(first.hls, { cache: "no-store" }).then(r => r.ok).catch(() => false));
+  // Stream only while the wall is near the screen; drop the streams when it scrolls away (phone data).
+  new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return cells.forEach(stop);
+    probe().then(can => { if (can) cells.forEach(start); else wall.classList.add("blocked"); });
+  }), { rootMargin: "200px 0px" }).observe(wall);
+})();
+$("lgBig").textContent = CONFIG.logistics.big;
+$("lg").innerHTML = CONFIG.logistics.rows.map(r => '<div class="rv"><span><b>' + esc(r[0]) + '</b>' + (r[1] ? '<small>' + esc(r[1]) + '</small>' : '') + '</span><i class="mono' + (r[2] === "On you" ? ' you' : '') + '">' + esc(r[2]) + '</i></div>').join("");
+$("rules").firstElementChild.innerHTML = CONFIG.rules.map((r, i) => '<div class="rule"><div><div class="mono rv">' + (i === 0 ? "05 · House rules · " : "") + (i + 1) + ' / ' + CONFIG.rules.length + '</div><p class="rv">' + esc(r) + '</p></div></div>').join("");
+$("ideasLabel").textContent = "06 · " + CONFIG.ideas.label;
+$("ideasBig").textContent = CONFIG.ideas.big;
+$("ideasBody").textContent = CONFIG.ideas.body;
+$("ideaFields").innerHTML = CONFIG.ideas.questions.map((x, i) => '<label class="f"><span class="mono">A' + (i + 1) + '</span><span class="q">' + esc(x.q) + '</span><input data-idea="' + i + '"' +
+  (x.link ? ' type="url" inputmode="url" autocapitalize="off" spellcheck="false"' : '') + ' maxlength="300" placeholder="' + esc(x.ph) + '" autocomplete="off"></label>').join("");
+$("rsvpBig").textContent = fill(CONFIG.rsvp.big);
+$("foot").textContent = CONFIG.camp + " · Los Angeles · By invitation only · " + CONFIG.email;
+
+/* ---------- the record that gets cut ---------- */
+const BANDS = [172, 136, 100];   // A1 is the outer band, like a real record
+function cutSVG(id) {
+  let s = '<svg viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="200" fill="#0b0b0b"/>';
+  for (let r = 84; r < 196; r += 4) s += '<circle cx="200" cy="200" r="' + r + '" fill="none" stroke="#fff" stroke-opacity=".035" stroke-width=".6"/>';
+  BANDS.forEach((r, i) => {
+    const c = (2 * Math.PI * r).toFixed(1);
+    s += '<circle class="band" data-band="' + i + '" cx="200" cy="200" r="' + r + '" fill="none" stroke="#34332f" stroke-width="30" stroke-dasharray="' + c + '" stroke-dashoffset="' + c + '" transform="rotate(-90 200 200)"/>';
+    for (let g = -12; g <= 12; g += 4) s += '<circle cx="200" cy="200" r="' + (r + g) + '" fill="none" stroke="#0b0b0b" stroke-width="1.1"/>';
+  });
+  s += '<circle cx="200" cy="200" r="66" fill="#F4F2EC"/><circle cx="200" cy="200" r="61" fill="none" stroke="#111" stroke-width=".5" opacity=".3"/>' +
+    '<text x="200" y="186" text-anchor="middle" font-size="' + (FIRST.length > 9 ? 13 : 19) + '" font-weight="300" letter-spacing="-.4" fill="#111">' + esc(FIRST) + '</text>' +
+    '<text x="200" y="228" text-anchor="middle" font-size="6" font-weight="500" letter-spacing="2.2" fill="#111">N° ' + NO2 + '</text><circle cx="200" cy="200" r="5" fill="#0E0E0E" id="hole' + id + '"/></svg>';
+  return s;
+}
+$("cutA").innerHTML = cutSVG("A");
+$("cutB").innerHTML = cutSVG("B");
+const ideas = ["", "", ""];
+function paintIdeas() {
+  ["A", "B"].forEach(k => {
+    $("cut" + k).querySelectorAll(".band").forEach(b => {
+      const on = !!ideas[+b.dataset.band].trim();
+      b.style.strokeDashoffset = on ? "0" : b.getAttribute("stroke-dasharray");
+    });
+    $("tracks" + k).innerHTML = ideas.map((t, i) => '<div class="' + (t.trim() ? "" : "empty") + '"><span>A' + (i + 1) + '</span><span>' + (t.trim() ? esc(CONFIG.ideas.questions[i].link ? linkLabel(t) : t.trim()) : "Untitled") + '</span></div>').join("") +
+      '<div><span></span><span class="mono">' + esc(CONFIG.ideas.credit.replace("{first}", FIRST)) + '</span></div>';
+  });
+}
+// "youtube.com/watch?v=abc" -> "YouTube · watch?v=abc". Anything that isn't a link shows as typed.
+const PLATFORMS = { "youtube.com": "YouTube", "youtu.be": "YouTube", "tiktok.com": "TikTok", "instagram.com": "Instagram", "x.com": "X", "twitter.com": "X", "twitch.tv": "Twitch", "spotify.com": "Spotify" };
+function linkLabel(t) {
+  t = t.trim();
+  try {
+    const u = new URL(/^https?:\/\//i.test(t) ? t : "https://" + t);
+    if (!u.hostname.includes(".")) return t;
+    const host = u.hostname.replace(/^(www|m|vm)\./, ""), base = host.split(".").slice(-2).join(".");
+    const rest = (u.pathname + u.search).replace(/^\/+/, "");
+    const tail = rest.length > 26 ? rest.slice(0, 25) + "…" : rest;
+    return (PLATFORMS[base] || host) + (tail ? " · " + tail : "");
+  } catch (e) { return t; }
+}
+document.querySelectorAll("[data-idea]").forEach(inp => inp.addEventListener("input", () => { ideas[+inp.dataset.idea] = inp.value; paintIdeas(); }));
+
+/* ---------- schedule timeline ---------- */
+const TL = CONFIG.timeline, T0 = TL.start, COLW = 100 / TL.days.length;   // COLW = % width of one day
+const xPct = d => (d - T0) * COLW;
+(function buildTimeline() {
+  $("tl").style.setProperty("--cols", TL.days.length);
+  let h = '<div class="row ruler"><div class="h mono">' + esc(TL.head) + '</div><div class="lane">' + TL.days.map(d => '<span class="mono"><b>' + esc(d[0]) + '</b>' + esc(d[1]) + '</span>').join("") + '</div></div>';
+  CONFIG.tracks.forEach(tr => {
+    h += '<div class="row"><div class="h mono">' + esc(tr.name) + '</div><div class="lane">' + tr.clips.map(c =>
+      '<button type="button" class="clip' + (c.ghost ? " ghost" : "") + (c.locked ? " locked" : "") + '" data-beats="' + c.beats.join(",") + '" style="left:' + xPct(c.from) + '%;width:' + (c.to - c.from) * COLW + '%" aria-label="' + esc(tr.name + " " + c.label) + '">' + esc(c.label) + '</button>').join("") + '</div></div>';
+  });
+  h += '<div class="heads"><div class="ph" id="ph"></div></div>';
+  $("tl").innerHTML = h;
+})();
+const sched = $("sched"), clips = Array.from(document.querySelectorAll(".clip"));
+const D0 = T0 + 0.25, D1 = T0 + TL.days.length - 0.2;   // the playhead sweeps the guest days evenly
+const dayAt = p => D0 + p * (D1 - D0);
+const pAt = d => Math.min(1, Math.max(0, (d - D0) / (D1 - D0)));
+function fitLabels() { clips.forEach(c => { c.classList.remove("nolabel"); if (c.scrollWidth > c.clientWidth + 1) c.classList.add("nolabel"); }); }
+fitLabels(); addEventListener("resize", fitLabels); if (document.fonts) document.fonts.ready.then(fitLabels);
+let beatNow = -1;
+function setBeat(i) {
+  if (i === beatNow) return;
+  const first = beatNow < 0; beatNow = i;
+  const b = CONFIG.beats[i], el = $("beat");
+  const put = () => { $("beatDay").textContent = b.day; $("beatTitle").textContent = b.title; $("beatBody").textContent = b.body; $("tc").textContent = b.tc; el.classList.remove("sw"); };
+  if (first || REDUCE) put(); else { el.classList.add("sw"); setTimeout(put, 220); }
+  clips.forEach(c => c.classList.toggle("on", c.dataset.beats.split(",").indexOf(String(i)) > -1));
+}
+function onScroll() {
+  const r = sched.getBoundingClientRect(), span = r.height - innerHeight;
+  const p = Math.min(1, Math.max(0, -r.top / span)), d = dayAt(p);
+  $("ph").style.left = xPct(d) + "%";
+  let i = 0; CONFIG.beats.forEach((b, k) => { if (d >= b.start) i = k; });
+  setBeat(i);
+}
+addEventListener("scroll", onScroll, { passive: true });
+addEventListener("resize", onScroll);
+clips.forEach(c => c.addEventListener("click", () => {
+  const b = CONFIG.beats[+c.dataset.beats.split(",")[0]];
+  scrollTo({ top: sched.offsetTop + pAt(b.at) * (sched.offsetHeight - innerHeight), behavior: REDUCE ? "auto" : "smooth" });
+}));
+onScroll();
+
+/* ---------- reveal on scroll ---------- */
+function watchReveals() {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.2, rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".rv:not(.in)").forEach((el, i) => { el.style.transitionDelay = (i % 4) * 90 + "ms"; io.observe(el); });
+}
+watchReveals();
+
+/* ---------- RSVP ---------- */
+const st = { answer: "", days: {} };
+const pill = (group, key, text) => '<button type="button" class="pill" data-g="' + group + '" data-k="' + key + '" aria-pressed="false">' + esc(text) + '</button>';
+$("ans").innerHTML = CONFIG.rsvp.answers.map(a => pill("ans", a[0], a[1])).join("");
+$("ans").style.setProperty("--n", CONFIG.rsvp.answers.length);
+$("confirm").textContent = CONFIG.rsvp.confirm;
+$("days").innerHTML = CONFIG.rsvp.days.map(a => pill("days", a[0], a[1])).join("");
+const form = $("form");
+function paintForm() {
+  form.querySelectorAll(".pill").forEach(b => {
+    const g = b.dataset.g, k = b.dataset.k;
+    b.setAttribute("aria-pressed", String(g === "ans" ? st.answer === k : !!st[g][k]));
+  });
+  const yes = st.answer === "yes" || st.answer === "yes2";
+  $("more").hidden = !yes;
+  $("go").textContent = st.answer === "no" ? CONFIG.rsvp.goNo : CONFIG.rsvp.go;
+  $("confirm").hidden = st.answer === "no";
+}
+form.addEventListener("click", e => {
+  const b = e.target.closest(".pill"); if (!b) return;
+  const g = b.dataset.g, k = b.dataset.k;
+  if (g === "ans") st.answer = k;
+  else st[g][k] = !st[g][k];
+  $("err").textContent = "";
+  paintForm();
+});
+form.addEventListener("input", () => { $("err").textContent = ""; });
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const yes = st.answer === "yes" || st.answer === "yes2", v = n => form.elements[n].value.trim();
+  let err = "";
+  if (!st.answer) err = "Pick an answer first.";
+  else if (yes && !CONFIG.rsvp.days.some(d => st.days[d[0]])) err = "Pick at least one day.";
+  else if (yes && !v("contact")) err = "Add a phone or handle so we can reach you.";
+  if (err) { $("err").textContent = err; return; }
+  const dayNames = CONFIG.rsvp.days.filter(d => st.days[d[0]]).map(d => d[1]).join(", ");
+  const data = { _subject: "Creator Sessions RSVP - " + NAME + (yes ? "" : " (can't make it)"),
+    name: NAME, no: NO, attending: yes ? "yes" : "no", days: yes ? dayNames : "",
+    favoriteMade: ideas[0].trim(), favoriteChannels: ideas[1].trim(), wishToMake: ideas[2].trim(),
+    from: v("from"), travel: v("travel"), dietary: v("dietary"), emergency: v("emergency"), contact: v("contact"), needs: v("needs"),
+    page: location.href };
+  const go = $("go"); go.disabled = true; go.style.opacity = ".6";
+  const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 10000);
+  fetch(RSVP_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data), signal: ctrl.signal })
+    .then(r => { if (!r.ok) throw new Error("RSVP failed: " + r.status); })
+    .catch(() => mailtoFallback(data))   // endpoint down or rejected: hand the RSVP to email so none is lost
+    .then(() => {
+      clearTimeout(timer); go.disabled = false; go.style.opacity = "";
+      store.set(K_RSVP, JSON.stringify({ st, ideas, fields: { from: data.from, travel: data.travel, dietary: data.dietary, emergency: data.emergency, contact: data.contact, needs: data.needs } }));
+      showDone(true);
+    });
+});
+function mailtoFallback(data) {
+  const body = Object.keys(data).filter(k => k !== "_subject" && k !== "page").map(k => k + ": " + data[k]).join("\n");
+  location.href = "mailto:" + CONFIG.email + "?subject=" + encodeURIComponent(data._subject) + "&body=" + encodeURIComponent(body);
+}
+function showDone(animate) {
+  const yes = st.answer !== "no";
+  $("doneKicker").textContent = yes ? CONFIG.done.kicker : CONFIG.done.noKicker;
+  $("doneBig").textContent = fill(yes ? CONFIG.done.big : CONFIG.done.noBig);
+  $("doneBody").textContent = fill(yes ? CONFIG.done.body : CONFIG.done.noBody);
+  const picked = CONFIG.rsvp.days.filter(d => st.days[d[0]]).map(d => d[2]);
+  const a = picked.length ? Math.min.apply(null, picked) : 1, b = picked.length ? Math.max.apply(null, picked) : 3;
+  const ymd = d => "202612" + String(d).padStart(2, "0");
+  $("cal").href = "https://calendar.google.com/calendar/render?" + new URLSearchParams({ action: "TEMPLATE", text: CONFIG.camp, dates: ymd(a) + "/" + ymd(b + 1), details: "Address sent privately closer to the date. Questions: " + CONFIG.email, location: "Los Angeles, CA" });
+  $("cal").hidden = !yes;
+  $("cutB").parentElement.hidden = !yes;
+  form.hidden = true; $("done").hidden = false;
+  paintIdeas();
+  if (animate) {
+    $("rsvp").scrollIntoView({ behavior: REDUCE ? "auto" : "smooth", block: "start" });
+    const svg = $("cutB").firstElementChild;
+    if (yes && !REDUCE && svg.animate) svg.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(1440deg)" }], { duration: 3200, easing: "cubic-bezier(.12,.6,.16,1)" });
+  }
+}
+$("edit").addEventListener("click", () => { $("done").hidden = true; form.hidden = false; form.querySelectorAll(".rv").forEach(el => el.classList.add("in")); });
+(function restore() {
+  let s = null; try { s = JSON.parse(store.get(K_RSVP) || "null"); } catch (e) {}
+  if (!s) { paintForm(); paintIdeas(); return; }
+  Object.assign(st, s.st);
+  (s.ideas || []).forEach((t, i) => { ideas[i] = t; const inp = document.querySelector('[data-idea="' + i + '"]'); if (inp) inp.value = t; });
+  Object.keys(s.fields || {}).forEach(k => { if (form.elements[k]) form.elements[k].value = s.fields[k]; });
+  paintForm(); showDone(false);
+})();
+
+/* ---------- the opening: many dots gather, fade to 15, and the 15 spin into the record ---------- */
+const canvas = $("fx"), ctx = canvas.getContext("2d"), rec = $("rec"), label = $("label"), copy = $("copy"), hint = $("hint");
+const O = CONFIG.open, T = O.t, root = document.documentElement;
+const clamp01 = n => n < 0 ? 0 : n > 1 ? 1 : n;
+const ease = u => u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
+const rnd = (a, b) => a + Math.random() * (b - a);
+let W = 0, H = 0, cx = 0, cy = 0, R = 150, P = [], runId = 0, timers = [];
+
+function layout() {
+  root.style.setProperty("--d", Math.round(Math.min(innerWidth * 0.78, innerHeight * 0.46, 440)) + "px");
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  W = innerWidth; H = innerHeight;
+  canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const b = rec.getBoundingClientRect();
+  cx = b.left + b.width / 2; cy = b.top + b.height / 2; R = b.width / 2;
+}
+function makeParticles() {
+  const n = CONFIG.people, k = Math.max(0.7, Math.min(1.25, R / 190)), inner = R * 0.4;
+  const slots = Array.from({ length: n }, (_, i) => i).sort(() => Math.random() - 0.5);
+  const free = () => ({ x0: rnd(-0.08, 1.08) * W, y0: rnd(-0.08, 1.08) * H, vx: rnd(-14, 14), vy: rnd(-14, 14),
+    f1: rnd(0.6, 1.8), f2: rnd(0.6, 1.8), p1: rnd(0, 6.28), p2: rnd(0, 6.28), appear: Math.random() * T.appearSpread, gd: Math.random() * T.gatherStagger });
+  P = [];
+  const m = innerWidth < 700 ? O.particles.mobile : O.particles.desktop;
+  for (let i = 0; i < m; i++) {
+    const rb = R * Math.sqrt(Math.random());
+    P.push(Object.assign(free(), { crowd: true, th: rnd(0, 6.28), rb,
+      wb: (Math.random() < 0.18 ? -1 : 1) * rnd(1.6, 4.2) * (0.7 + 0.5 * (1 - rb / (R * 0.62))),
+      wf: rnd(1.2, 3.4), wp: rnd(0, 6.28), out: T.thinAt + Math.random() * 0.7, s: rnd(O.ball[0], O.ball[1]) * k }));
+  }
+  // the 15 sit on their final circles from the start, hidden inside the crowd
+  for (let i = 0; i < n; i++) P.push(Object.assign(free(), { fa: slots[i] * 2.39996, rc: inner + (slots[i] + 0.5) * (R - inner) / n, s: O.ball[1] * k }));
+}
+function play() {
+  const id = ++runId;
+  timers.forEach(clearTimeout); timers = [];
+  root.classList.add("lock"); scrollTo(0, 0);
+  rec.style.transition = "none"; rec.classList.remove("on");
+  copy.style.transition = "none"; copy.classList.remove("on");
+  label.style.transform = "";
+  canvas.style.transition = "none"; canvas.style.opacity = "1"; canvas.style.pointerEvents = "auto";
+  hint.classList.remove("off");
+  layout(); makeParticles();
+  void rec.offsetWidth; rec.style.transition = ""; copy.style.transition = "";
+  const SPIN = O.spin, fast = O.fastSpin, ringGap = R * 0.6 / CONFIG.people;
+  const blurFrom = SPIN * O.blurFrom, blurK = 6.2832 / (SPIN * fast - blurFrom) * 1.05, solidAt = T.fastAt + T.fastDur + 0.25;
+  const t0 = performance.now(); let last = t0, solid = false, Theta = 0;
+  function frame(now) {
+    if (id !== runId) return;
+    const t = (now - t0) / 1000, dt = Math.min(0.05, (now - last) / 1000); last = now;
+    ctx.globalAlpha = 1; ctx.fillStyle = "#ECEAE5"; ctx.fillRect(0, 0, W, H);
+    const breathe = 1 + 0.03 * Math.sin(t * 3.1);
+    // one shared speed and blur for all 15, every frame
+    const Wc = SPIN * (1 + (fast - 1) * ease(clamp01((t - T.fastAt) / T.fastDur)));
+    Theta += Wc * dt;
+    const len = Math.min(6.2832, Math.max(0, Wc - blurFrom) * blurK), close = len / 6.2832;
+    ctx.fillStyle = "#111"; ctx.strokeStyle = "#111";
+    for (let i = 0; i < P.length; i++) {
+      const p = P[i], a = clamp01((t - p.appear) / 0.5);
+      if (a <= 0) continue;
+      const fx = p.x0 + p.vx * t + 16 * Math.sin(t * p.f1 + p.p1), fy = p.y0 + p.vy * t + 16 * Math.cos(t * p.f2 + p.p2);
+      const g = ease(clamp01((t - T.gatherStart - p.gd) / T.gatherDur));
+      if (p.crowd) {
+        const left = 1 - clamp01((t - p.out) / 0.7);
+        if (left <= 0) continue;
+        p.th += p.wb * dt;
+        const cr = p.rb * (1 + O.wobble * Math.sin(t * p.wf + p.wp)) * breathe;
+        const qx = cx + cr * Math.cos(p.th), qy = cy + cr * Math.sin(p.th);
+        ctx.globalAlpha = a * left;
+        ctx.beginPath(); ctx.arc(fx + (qx - fx) * g, fy + (qy - fy) * g, p.s * (0.3 + 0.7 * a) * (0.5 + 0.5 * left), 0, 6.2832); ctx.fill();
+        continue;
+      }
+      const ang = Theta + p.fa, r = p.rc;
+      const x = fx + (cx + r * Math.cos(ang) - fx) * g, y = fy + (cy + r * Math.sin(ang) - fy) * g;
+      const rad = p.s * (0.3 + 0.7 * a);
+      if (len > 0.01) {
+        // motion blur: as long as the dot is fast, fading toward its tail, closing into a groove at top speed
+        const tailA = close * close, ink = v => "rgba(17,17,17," + v.toFixed(3) + ")";
+        ctx.lineCap = "butt"; ctx.lineWidth = rad * 2 + (ringGap * 1.08 - rad * 2) * close * close; ctx.globalAlpha = a;
+        if (ctx.createConicGradient) {
+          const gr = ctx.createConicGradient(ang - len, cx, cy);
+          gr.addColorStop(0, ink(tailA)); gr.addColorStop(Math.min(1, close * 0.55), ink(tailA + (1 - tailA) * 0.3)); gr.addColorStop(Math.min(1, close), ink(1));
+          ctx.strokeStyle = gr; ctx.beginPath(); ctx.arc(cx, cy, Math.max(1, r), ang - len, ang); ctx.stroke(); ctx.strokeStyle = "#111";
+        } else { ctx.beginPath(); ctx.arc(cx, cy, Math.max(1, r), ang - len, ang); ctx.stroke(); }
+      }
+      ctx.globalAlpha = a;
+      ctx.beginPath(); ctx.arc(x, y, rad + (ringGap * 0.54 - rad) * close * close, 0, 6.2832); ctx.fill();
+    }
+    if (!solid && t >= solidAt) { solid = true; solidify(id); }
+    if (t < solidAt + T.fade + 0.4) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+function solidify(id) {
+  rec.style.transition = "opacity " + T.fade + "s ease"; rec.classList.add("on");
+  canvas.style.transition = "opacity " + T.fade + "s ease .12s"; canvas.style.opacity = "0"; canvas.style.pointerEvents = "none";
+  hint.classList.add("off"); root.classList.remove("lock"); store.set(K_SEEN, "1");
+  const K = O.spin * 1.8 * T.spinDown / 3, s0 = performance.now();
+  (function tick(n) {
+    if (id !== runId) return;
+    const u = clamp01((n - s0) / 1000 / T.spinDown);
+    label.style.transform = "rotate(" + (-K * Math.pow(1 - u, 3)) + "rad)";
+    if (u < 1) requestAnimationFrame(tick);
+  })(s0);
+  timers.push(setTimeout(() => { if (id === runId) copy.classList.add("on"); }, T.copyAt * 1000));
+}
+function finishNow() {
+  runId++; timers.forEach(clearTimeout); timers = [];
+  canvas.style.transition = "opacity .3s ease"; canvas.style.opacity = "0"; canvas.style.pointerEvents = "none";
+  rec.style.transition = "opacity .3s ease"; rec.classList.add("on");
+  label.style.transform = ""; copy.classList.add("on"); hint.classList.add("off");
+  root.classList.remove("lock"); store.set(K_SEEN, "1");
+}
+canvas.addEventListener("click", finishNow);
+$("replay").addEventListener("click", play);
+let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(layout, 150); });
+if (REDUCE || store.get(K_SEEN)) { layout(); finishNow(); }
+else if (document.fonts && document.fonts.ready) document.fonts.ready.then(play);
+else play();
+</script>
+</body>
+</html>
