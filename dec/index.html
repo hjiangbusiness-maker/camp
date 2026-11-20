@@ -348,7 +348,9 @@ const CONFIG = {
 /* ---------- who ---------- */
 const params = new URLSearchParams(location.search);   // ?name=<first name>&no=<number>; no name falls back to "friend"
 const RSVP_ENDPOINT = "https://formspree.io/f/xwvdzlgv";
-const rawName = ((params.get("name") || "friend").trim().slice(0, 40)) || "friend";
+const NAME_FIX = { alyx: "alex" };   // spelling corrections for links already sent
+const rawName0 = ((params.get("name") || "friend").trim().slice(0, 40)) || "friend";
+const rawName = NAME_FIX[rawName0.toLowerCase()] || rawName0;
 const NAME = rawName.split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 const FIRST = NAME.split(" ")[0];
 const SLUG = rawName.toLowerCase().replace(/[^a-z0-9]+/g, "-") || "friend";
